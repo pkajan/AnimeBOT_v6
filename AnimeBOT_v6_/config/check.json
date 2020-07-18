@@ -1,0 +1,5 @@
+{
+    "config.json": "./config/config.json",
+    "anime.json": "./data/anime.json",
+    "replies.json": "./data/replies.json"
+}

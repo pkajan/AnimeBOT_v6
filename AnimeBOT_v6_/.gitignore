@@ -1,0 +1,16 @@
+node_modules/
+package-lock.json
+config/config.json
+data/replies.json
+data/anime.json
+common_learning.txt
+logs.txt
+announce.json
+announceFIN.txt
+images/*.gif
+images/*.jpg
+images/*.jpeg
+images/*.webm
+images/*.png
+data/anime.json
+data/replies.json

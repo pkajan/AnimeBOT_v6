@@ -1,0 +1,44 @@
+{
+  "name": "animebot",
+  "version": "6.0.0",
+  "description": "-",
+  "main": "index.js",
+  "dependencies": {
+    "cron": "^1.8.2",
+    "date-and-time": "^0.13.1",
+    "discord.js": "^12.2.0",
+    "fs-extra": "^9.0.1",
+    "node-fetch": "^2.6.0",
+    "i18n": "^0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "preinstall": "npm i -g nodemon",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "nodejs"
+  ],
+  "author": "pKajan",
+  "license": "GPL-3.0-or-later",
+  "nodemonConfig": {
+    "verbose": true,
+    "restartable": "rs",
+    "ignore": [
+      "package-lock.json",
+      "*.txt",
+      ".git",
+      "node_modules/*"
+    ],
+    "watch": [
+      "language/",
+      "app/",
+      "data/",
+      "config/"
+    ],
+    "ext": "js json",
+    "delay": "5000"
+  }
+}
