@@ -1,3 +1,5 @@
+const log = require('../logger.js');
+
 module.exports = {
 	name: 'forcecheck',
 	description: 'forcecheck today entries for existance',

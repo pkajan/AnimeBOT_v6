@@ -1,3 +1,5 @@
+const log = require('../logger.js');
+
 module.exports = {
 	name: 'uptime',
 	description: 'show bot uptime',

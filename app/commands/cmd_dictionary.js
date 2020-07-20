@@ -1,3 +1,5 @@
+const log = require('../logger.js');
+
 module.exports = {
 	name: 'beep',
 	description: 'add string to dictionary',

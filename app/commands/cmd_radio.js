@@ -1,3 +1,5 @@
+const log = require('../logger.js');
+
 module.exports = {
 	name: 'radio',
 	description: 'radio',

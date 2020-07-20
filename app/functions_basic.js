@@ -31,7 +31,7 @@ module.exports = {
 
     name: 'JSON_file_add_edit_element',
     description: 'add or edit given element in JSON object',
-    execute(filename, elem) {
+    execute(filename, elem, data) {
         var obj = this.JSON_file_read(filename); //read data
         obj[`${elem}`] = data; // add/edit element
         fs.writeFileSync(filename, JSON.stringify(obj)); // write back to file

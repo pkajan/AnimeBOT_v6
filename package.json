@@ -8,8 +8,9 @@
     "date-and-time": "^0.13.1",
     "discord.js": "^12.2.0",
     "fs-extra": "^9.0.1",
+    "i18n": "^0.10.0",
     "node-fetch": "^2.6.0",
-    "i18n": "^0.10.0"
+    "simple-node-logger": "^18.12.24"
   },
   "devDependencies": {},
   "scripts": {

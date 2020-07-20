@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const i18n = require('i18n');
 const { prefix, token, language } = require('../config/config.json');
 const config = require('../config/config.json'); //file with config
+const log = require('./logger.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -23,11 +24,10 @@ i18n.configure({
     defaultLocale: language,
 });
 global.i18n = i18n;
-//console.log(i18n.__("Hello %s", "yolopod"));
 
 
 client.once('ready', () => {
-    console.log('Ready!');
+    log.info(i18n.__("ready"));
 });
 
 client.on('message', message => {
@@ -39,14 +39,19 @@ client.on('message', message => {
     var data = { "message": message, "client": client, "config": config, "prefix": prefix, "skuska": "volacodaco" };
 
     if (client.commands.has(command)) {
+        log.info(i18n.__("commandPASS", command));
         client.commands.get(command).execute(data, args);
-        console.log("ppc prikaz");
     } else {
-        console.log("neexistujuci prikaz");
+        log.info(i18n.__("commandNaN"));
     }
 
-    // do the same for the rest of the commands...
 })
+
+
+client.on('shardError', error => {
+    log.error(i18n.__("websocket_err"));
+    console.error('A websocket connection encountered an error:', error);
+});
 
 
 client.login(token);

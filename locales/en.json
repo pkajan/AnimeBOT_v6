@@ -1,7 +1,12 @@
 {
-	"Hello World": "Hello World",
-	"Hello": "Hello bitchiiiiiiz",
-	"Hello %s": "Hello %s",
 	"cmd_google_msg": "Ok lazy meatbug, here is what you are looking for: %s",
-	"cmd_say_empty": "Say something (%ssay something)"
+	"cmd_say_empty": "Say something (%s say something)",
+	"cmd_say_empty_log": "Say msg was EMPTY",
+	"cmd_say_msg": "User: **%s** forced me to say **%s**",
+	"ready": "BOT Ready!",
+	"commandPASS": "commandPASS: **%s**",
+	"commandNaN": "commandNaN: **%s**",
+	"cmd_google_msg_log": "User: **%s** googled **%s**",
+	"cmd_status_log": "User: **%s** changed status to **%s:%s**",
+	"websocket_err": "A websocket connection encountered an error: %s"
 }
