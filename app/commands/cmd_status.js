@@ -1,7 +1,8 @@
 const log = require('../logger.js');
 const fcb = require('../functions_basic.js');
 
-const config = require('../../config/config.json');
+const config_path = './config/config.json';
+
 
 module.exports = {
 	name: 'status',
@@ -18,7 +19,9 @@ module.exports = {
 				.then(log.info(i18n.__("cmd_status_log", data.message.author.username.toString(), status_type, status_name)))
 				.catch(e => log.error(e));
 
-				fcb.JSON_file_add_edit_element(config, "activityType", status_name);
+			//save changed status to settings
+			fcb.JSON_edit(config_path, "activityName", status_name);
+			fcb.JSON_edit(config_path, "activityType", status_type);
 		}
 	},
 };

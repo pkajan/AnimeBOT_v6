@@ -4,6 +4,8 @@ const i18n = require('i18n');
 const { prefix, token, language } = require('../config/config.json');
 const config = require('../config/config.json'); //file with config
 const log = require('./logger.js');
+const basic = require('./functions_basic');
+const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -13,10 +15,12 @@ for (const file of commandFiles) {
     const command = require(`../app/commands/${file}`);
     client.commands.set(command.name, command);
 }
-console.log("Command list:");
+/*console.log("Command list:");
 console.log(commandFiles.map(x => {
     return x.replace('.js', '');
 }));
+*/
+
 
 // minimal config i18n
 i18n.configure({
@@ -28,6 +32,7 @@ global.i18n = i18n;
 
 client.once('ready', () => {
     log.info(i18n.__("ready"));
+    console.log(basic.deunicode("ľščťž"));
 });
 
 client.on('message', message => {
@@ -36,7 +41,8 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
-    var data = { "message": message, "client": client, "config": config, "prefix": prefix, "skuska": "volacodaco" };
+    var data = { "message": message, "client": client, "config": config, "prefix": prefix, "baseAppPATH": baseAppPATH };
+
 
     if (client.commands.has(command)) {
         log.info(i18n.__("commandPASS", command));
