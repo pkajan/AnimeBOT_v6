@@ -35,14 +35,14 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
     var data = { "message": message, "client": client, "config": config, "prefix": prefix, "baseAppPATH": baseAppPATH };
 
-
+    //commands executions
     if (client.commands.has(command)) {
         log.info(i18n.__("commandPASS", command));
         client.commands.get(command).execute(data, args);
@@ -54,8 +54,7 @@ client.on('message', message => {
 
 
 client.on('shardError', error => {
-    log.error(i18n.__("websocket_err"));
-    console.error('A websocket connection encountered an error:', error);
+    log.error(i18n.__("websocket_err", error));
 });
 
 

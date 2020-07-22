@@ -14,5 +14,6 @@
 	"pageExist_log": "Page '%s' EXIST [invoked by %s]",
 	"pageNOTExist_log": "Page '%s' NOT EXIST [invoked by %s]",
 	"pageExist_msg": "Url does exists! [<%s>]",
-	"pageNOTExist_msg": "Url does **NOT** exists! [<%s>]"
+	"pageNOTExist_msg": "Url does **NOT** exists! [<%s>]",
+	"FileNotFound": "File not found! [<%s>]"
 }

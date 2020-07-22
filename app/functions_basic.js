@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const util = require('util');
 const request = require('node-fetch');
 const date = require('date-and-time');
+const log = require('../logger.js');
 
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
@@ -44,7 +45,7 @@ module.exports.JSON_read = function (filename) {
         data = fs.readFileSync(filename, 'utf8').toString(); //read data
     } catch (err) {
         if (err.code === 'ENOENT') {
-            console.log('File not found!');
+            log.info(i18n.__("FileNotFound", filename));
             data = "{}"
         } else {
             throw err;
