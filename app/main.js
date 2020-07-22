@@ -32,7 +32,6 @@ global.i18n = i18n;
 
 client.once('ready', () => {
     log.info(i18n.__("ready"));
-    console.log(basic.deunicode("ľščťž"));
 });
 
 client.on('message', message => {
