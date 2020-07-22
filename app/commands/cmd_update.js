@@ -1,5 +1,5 @@
 const log = require('../logger.js');
-const { updateCMD } = require('../../config/check.json');
+const { updateCMD } = require('../../config/config.json');
 
 
 module.exports = {
