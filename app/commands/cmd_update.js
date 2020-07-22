@@ -13,6 +13,6 @@ module.exports = {
 			encoding: 'utf8'
 		};
 		log.info(i18n.__("updateStarted", data.message.author.username.toString()));
-		console.log(execSync(cmd, options));
+		console.log(execSync(`${cmd}`, options));
 	}
 };
