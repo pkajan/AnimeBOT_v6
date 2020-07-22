@@ -1,2 +1,2 @@
-TIMEOUT /T 5
-git reset --hard & git fetch --all & git pull & npm install nodemon -g & npm install & npm update
+git reset --hard & git fetch --all & git pull & npm install & npm update & TIMEOUT /T 5 & exit
+

@@ -8,5 +8,11 @@
 	"commandNaN": "commandNaN: **%s**",
 	"cmd_google_msg_log": "User: **%s** googled **%s**",
 	"cmd_status_log": "User: **%s** changed status to **%s:%s**",
-	"websocket_err": "A websocket connection encountered an error: %s"
+	"websocket_err": "A websocket connection encountered an error: %s",
+	"updateStarted": "Update started [invoked by %s]",
+	"ENOTFOUND": "Page not found (%s)[invoked by %s]",
+	"pageExist_log": "Page '%s' EXIST [invoked by %s]",
+	"pageNOTExist_log": "Page '%s' NOT EXIST [invoked by %s]",
+	"pageExist_msg": "Url does exists! [<%s>]",
+	"pageNOTExist_msg": "Url does **NOT** exists! [<%s>]"
 }

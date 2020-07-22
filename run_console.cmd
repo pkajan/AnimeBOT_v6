@@ -1,1 +1,1 @@
-cmd /k "cd %cd%"
+@cmd /k "cd %cd%"
