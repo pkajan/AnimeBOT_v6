@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const Discord = require('discord.js');
 const i18n = require('i18n');
-const { prefix, token, language } = require('../config/config.json');
+const { prefix, token, language, activityType, activityName } = require('../config/config.json');
 const config = require('../config/config.json'); //file with config
 const log = require('./logger.js');
 const basic = require('./functions_basic');
@@ -32,6 +32,9 @@ global.i18n = i18n;
 
 client.once('ready', () => {
     log.info(i18n.__("ready"));
+    client.user.setPresence({ activity: { type: activityType, name: activityName } })
+        .then(log.info(i18n.__("set_status_log", activityType, activityName)))
+        .catch(e => log.error(e));
 });
 
 client.on('message', message => {

@@ -15,7 +15,7 @@ module.exports = {
 			args.splice(0, 1);
 			var status_name = args.join(" ");
 
-			data.client.user.setPresence({ activity: { name: status_name, type: status_type } })
+			data.client.user.setPresence({ activity: { type: status_type, name: status_name } })
 				.then(log.info(i18n.__("cmd_status_log", data.message.author.username.toString(), status_type, status_name)))
 				.catch(e => log.error(e));
 
