@@ -13,6 +13,11 @@ module.exports = {
 	name: 'link',
 	description: 'test link existance on internet',
 	execute(data, args) {
+		if (!args[0].includes("http") & !args[0].includes("ftp")) {
+			log.info(i18n.__("NotURL_log", args[0], data.message.author.username.toString()));
+			data.message.channel.send(i18n.__("NotURL_msg", args[0]));
+			return;
+		}
 
 		if (args[0]) {
 			fetch(`${args[0]}`)

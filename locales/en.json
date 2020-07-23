@@ -16,5 +16,7 @@
 	"pageNOTExist_log": "Page '%s' NOT EXIST [invoked by %s]",
 	"pageExist_msg": "Url does exists! [<%s>]",
 	"pageNOTExist_msg": "Url does **NOT** exists! [<%s>]",
+	"NotURL_log": "NON valid URL '%s' [invoked by %s]",
+	"NotURL_msg": "This '%s' is not a valid URL.",
 	"FileNotFound": "File not found! [<%s>]"
 }
