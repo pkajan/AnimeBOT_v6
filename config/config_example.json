@@ -4,6 +4,6 @@
     "activityName": "self",
     "token": "<token>",
     "logfile": "logs.txt",
-    "updateCMD": "git reset --hard & git fetch --all & git pull & npm install & npm update & TIMEOUT /T 5 & exit",
+    "updateCMD": "git reset --hard & git fetch --all & git pull & npm update & exit",
     "language": "en"
 }

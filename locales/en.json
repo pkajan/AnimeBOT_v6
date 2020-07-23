@@ -10,6 +10,7 @@
 	"cmd_status_log": "User: **%s** changed status to **%s:%s**",
 	"websocket_err": "A websocket connection encountered an error: %s",
 	"updateStarted": "Update started [invoked by %s]",
+	"updateEnded": "Update ended [invoked by %s]",
 	"ENOTFOUND": "Page not found (%s)[invoked by %s]",
 	"pageExist_log": "Page '%s' EXIST [invoked by %s]",
 	"pageNOTExist_log": "Page '%s' NOT EXIST [invoked by %s]",
