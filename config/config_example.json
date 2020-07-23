@@ -1,26 +1,9 @@
 {
-    "prefix": "?",
-    "prefix_ignore": "! * /",
+    "prefix": "+",
     "activityType": "WATCHING",
-    "activityName": "Anime all day...",
-    "status": "available",
-    "credentials": {
-        "token": "your_token_goes_here"
-    },
-    "ownerID": "123456789",
-    "adminIDs": "987654321",
-    "defaultTextChannel": "123456789",
-    "animeDefaultChannels": "321654987;963258741",
-    "translation": "en",
-    "polite": true,
-    "slice_name_by_chars": "2",
-    "bot_img_chance": "5",
-    "show_more_than_week": true,
-    "checkXminutes": "60",
-    "status_update_announce_channel_id": "0",
-    "sleepDuration_seconds": "10",
-    "silence_time_ms": "600000",
-    "randomChance": "5",
-    "logFile": "logs.txt",
-    "onlineList": "https://myanimelist.eu/anime.json"
+    "activityName": "self",
+    "token": "<token>",
+    "logfile": "logs.txt",
+    "updateCMD": "git reset --hard & git fetch --all & git pull & npm install & npm update & TIMEOUT /T 5 & exit",
+    "language": "en"
 }

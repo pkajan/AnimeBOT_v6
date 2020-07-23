@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const util = require('util');
 const request = require('node-fetch');
 const date = require('date-and-time');
-const log = require('../logger.js');
+const log = require('./logger.js');
 
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {

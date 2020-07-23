@@ -36,8 +36,7 @@
     "watch": [
       "locales/",
       "app/",
-      "data/",
-      "config/"
+      "data/"
     ],
     "ext": "js json",
     "delay": "5000"
