@@ -24,6 +24,7 @@ var later = {};
 
 module.exports = {
 	name: 'onlinelist',
+	altnames: i18n.__("__alt_cmd__onlinelist"),
 	description: 'manualy initiate anime list update',
 	execute(data, args) {
 		var now = date.parse(date.format(new Date(), 'YYYY-MM-DD'), 'YYYY-MM-DD'); //current date

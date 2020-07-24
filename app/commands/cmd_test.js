@@ -2,6 +2,7 @@ const log = require('../logger.js');
 
 module.exports = {
 	name: 'test',
+	altnames: i18n.__("__alt_cmd__test"),
 	description: 'only test',
 	execute(data, args) {
 		message.channel.send('beep.');

@@ -2,6 +2,7 @@ const log = require('../logger.js');
 
 module.exports = {
 	name: 'google',
+	altnames: i18n.__("__alt_cmd__google"),
 	description: 'send google link into chat',
 	execute(data, args) {
 

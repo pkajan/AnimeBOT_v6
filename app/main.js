@@ -1,7 +1,7 @@
+require('./i18n'); //load i18n settings
 const fs = require('fs-extra');
 const Discord = require('discord.js');
-const i18n = require('i18n');
-const { prefix, token, language, activityType, activityName } = require('../config/config.json');
+const { prefix, token, activityType, activityName } = require('../config/config.json');
 const config = require('../config/config.json'); //file with config
 const log = require('./logger.js');
 const basic = require('./functions_basic');
@@ -14,22 +14,16 @@ const commandFiles = fs.readdirSync('./app/commands').filter(file => file.endsWi
 for (const file of commandFiles) {
     const command = require(`../app/commands/${file}`);
     client.commands.set(command.name, command);
+    command.altnames.split(";").forEach(element => {
+        client.commands.set(element, command); // add alternative commands
+    });
 }
 /*console.log("Command list:");
 console.log(commandFiles.map(x => {
     return x.replace('.js', '');
 }));
 */
-
-
-// minimal config i18n
-i18n.configure({
-    directory: __dirname + '/../locales',
-    defaultLocale: language,
-});
-global.i18n = i18n;
-
-
+//global.i18n = i18n;
 client.once('ready', () => {
     log.info(i18n.__("ready"));
     client.user.setPresence({ activity: { type: activityType, name: activityName } })

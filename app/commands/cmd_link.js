@@ -11,6 +11,7 @@ function checkStatus(res) {
 
 module.exports = {
 	name: 'link',
+	altnames: i18n.__("__alt_cmd__link"),
 	description: 'test link existance on internet',
 	execute(data, args) {
 		if (!args[0].includes("http") & !args[0].includes("ftp")) {

@@ -2,6 +2,7 @@ const log = require('../logger.js');
 
 module.exports = {
 	name: 'say',
+	altnames: i18n.__("__alt_cmd__say"),
 	description: 'force bot to say your words',
 	execute(data, args) {
 		if (args.length > 0) {

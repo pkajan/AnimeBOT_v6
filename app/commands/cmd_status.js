@@ -6,6 +6,7 @@ const config_path = './config/config.json';
 
 module.exports = {
 	name: 'status',
+	altnames: i18n.__("__alt_cmd__status"),
 	description: 'change status',
 	execute(data, args) {
 		var types = Array("WATCHING", "PLAYING", "LISTENING");

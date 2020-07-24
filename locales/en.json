@@ -19,5 +19,18 @@
 	"pageNOTExist_msg": "Url does **NOT** exists! [<%s>]",
 	"NotURL_log": "NON valid URL '%s' [invoked by %s]",
 	"NotURL_msg": "This '%s' is not a valid URL.",
-	"FileNotFound": "File not found! [<%s>]"
+	"FileNotFound": "File not found! [<%s>]",
+	"__alt_cmd__dictionary": "__alt_cmd__dictionary",
+	"__alt_cmd__forcecheck": "__alt_cmd__forcecheck",
+	"__alt_cmd__google": "__alt_cmd__google",
+	"__alt_cmd__info": "__alt_cmd__info",
+	"__alt_cmd__link": "__alt_cmd__link",
+	"__alt_cmd__log": "__alt_cmd__log",
+	"__alt_cmd__onlinelist": "__alt_cmd__onlinelist",
+	"__alt_cmd__say": "talk;told",
+	"__alt_cmd__silencer": "__alt_cmd__silencer",
+	"__alt_cmd__status": "__alt_cmd__status",
+	"__alt_cmd__template": "__alt_cmd__template",
+	"__alt_cmd__test": "__alt_cmd__test",
+	"__alt_cmd__update": "__alt_cmd__update"
 }
