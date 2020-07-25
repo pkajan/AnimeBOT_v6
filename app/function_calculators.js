@@ -1,24 +1,31 @@
-const log = require('../logger.js');
+const log = require('./logger.js');
 const date = require('date-and-time');
+require('date-and-time/plugin/ordinal');
+date.plugin('ordinal');
 
+//description: 'add set amount of days to timeobject'
+module.exports.addDays = function (timeobj, number) {
+    return date.addDays(timeobj, number);
+};
 
-module.exports = {
-    name: 'calcDiffDays',
-    description: 'calculate difference between dates in days',
-    execute(date1, date2) {
-        var firstDate = date.parse(`${date1.year}-${date1.month}-${date1.day}`, 'YYYY-M-DD');
-        var SecondDate = date.parse(`${date2.year}-${date2.month}-${date2.day}`, 'YYYY-M-DD');
+//description: 'add 0 (zero) befor number if number is lower than 10'
+module.exports.fixDubleDigits = function (number) {
+    if (parseInt(number) < 10) {
+        return `0${parseInt(number)}`;
+    } else {
+        return number;
+    }
+};
 
-        return date.subtract(firstDate, SecondDate).toDays();
-    },
-
-    name: 'calcDiffHours',
-    description: 'calculate difference between dates in hours',
-    execute(date1, date2) {
-        var firstDate = date.parse(`${date1.year}-${date1.month}-${date1.day}`, 'YYYY-M-DD');
-        var SecondDate = date.parse(`${date2.year}-${date2.month}-${date2.day}`, 'YYYY-M-DD');
-
-        return date.subtract(firstDate, SecondDate).toHours();
-    },
-
+//description: 'recursively add days to date till its bigger or equal to todays'
+module.exports.NewRelease = function (timeobject, daysPlus, startEP, lastEP) {
+    var now = date.parse(date.format(new Date(), 'YYYY-MM-DD'), 'YYYY-MM-DD'); //current date
+    var differenceDAYS = Math.ceil(date.subtract(timeobject, now).toDays());
+    var tmpDATE = timeobject;
+    if (differenceDAYS < 0 & startEP <= lastEP) {
+        tmpDATE = this.addDays(timeobject, daysPlus);
+        return this.NewRelease(tmpDATE, daysPlus, parseInt(startEP) + 1, lastEP);
+    } else {
+        return { "differenceDAYS": differenceDAYS, "startEP": startEP, "newDate": tmpDATE }
+    }
 };

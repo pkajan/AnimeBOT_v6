@@ -9,10 +9,31 @@ module.exports.deunicode = function (any_string) {
     return any_string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 };
 
+//description: 'parse strings with %s'
+module.exports.parse = function (str, arg) {
+    return str.replace(/%s/gi, arg);
+};
+
 //Download url content
 module.exports.download = function (url, destination) {
     request(url)
         .pipe(fs.createWriteStream(destination));
+};
+
+//read JSON and return results as object
+module.exports.JSON_read = function (filename) {
+    var data;
+    try {
+        data = fs.readFileSync(filename, 'utf8').toString(); //read data
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            log.info(i18n.__("FileNotFound", filename));
+            data = "{}"
+        } else {
+            throw err;
+        }
+    }
+    return JSON.parse(data); //parse - create object
 };
 
 //add or edit given element in JSON object
@@ -38,18 +59,8 @@ module.exports.fwASYNC = function (filepath, data) {
         });
 };
 
-//read JSON and return results as object
-module.exports.JSON_read = function (filename) {
-    var data;
-    try {
-        data = fs.readFileSync(filename, 'utf8').toString(); //read data
-    } catch (err) {
-        if (err.code === 'ENOENT') {
-            log.info(i18n.__("FileNotFound", filename));
-            data = "{}"
-        } else {
-            throw err;
-        }
-    }
-    return JSON.parse(data); //parse - create object
+//test if json object is empty
+module.exports.isEmpty = function (jsonObj) {
+    for (var i in jsonObj) return false;
+    return true;
 };
