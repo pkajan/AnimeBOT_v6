@@ -26,8 +26,8 @@ console.log(commandFiles.map(x => {
 //global.i18n = i18n;
 client.once('ready', () => {
     log.info(i18n.__("ready"));
-    client.user.setPresence({ activity: { type: activityType, name: activityName } })
-        .then(log.info(i18n.__("set_status_log", activityType, activityName)))
+    client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
+        .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
         .catch(e => log.error(e));
 });
 

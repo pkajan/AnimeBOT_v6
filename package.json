@@ -39,6 +39,6 @@
       "data/"
     ],
     "ext": "js json",
-    "delay": "10000"
+    "delay": "5000"
   }
 }

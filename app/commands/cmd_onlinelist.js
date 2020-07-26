@@ -6,7 +6,7 @@ const animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');
 const calc = require('../function_calculators.js');
 
-var OrderedList = { "today": {}, "tomorow": {}, "twoDays": {}, "three_to_sevenDays": {}, "later": {} };
+var OrderedList = { "today": {}, "tomorrow": {}, "twoDays": {}, "three_to_sevenDays": {}, "later": {} };
 
 module.exports = {
 	name: 'onlinelist',
@@ -32,9 +32,9 @@ module.exports = {
 					//code
 					OrderedList.today[name] = tmpDATA
 					break;
-				case (dayDiff == 1): //tomorow
+				case (dayDiff == 1): //tomorrow
 					//code
-					OrderedList.tomorow[name] = tmpDATA;
+					OrderedList.tomorrow[name] = tmpDATA;
 					break;
 				case (dayDiff == 2): //twoDays
 					//code
@@ -53,40 +53,24 @@ module.exports = {
 		var ListMessage = "";
 		EntryString = (obj) => { return `**${obj.name}**: ${date.format(obj.newDate, 'dddd, DDD MMMM')} [\`ep${obj.ep}\`]\n`; };
 
-		if (!basic.isEmpty(OrderedList.today)) {
-			ListMessage += "```fix\nToday:```\n";
-			for (var entry in OrderedList.today) {
-				var obj = OrderedList.today[entry];
-				ListMessage += EntryString(obj);
+		var combined = [OrderedList.today, OrderedList.tomorrow, OrderedList.twoDays, OrderedList.three_to_sevenDays];
+		var titles = [i18n.__("today"), i18n.__("tomorrow"), i18n.__("two_days"), i18n.__("less_than_week")];
+		combined.forEach(part => {
+			if (!basic.isEmpty(part)) {
+				ListMessage += "```fix\n" + titles[0] + ":```\n";
+				titles.shift();
+				for (var entry in part) {
+					var obj = part[entry];
+					ListMessage += EntryString(obj);
+				}
+				ListMessage += "\n";
+			} else {
+				titles.shift();
 			}
-			ListMessage += "\n";
-		}
-		if (!basic.isEmpty(OrderedList.tomorow)) {
-			ListMessage += "```fix\nOne Day:```\n";
-			for (var entry in OrderedList.tomorow) {
-				var obj = OrderedList.tomorow[entry];
-				ListMessage += EntryString(obj);
-			}
-			ListMessage += "\n";
-		}
-		if (!basic.isEmpty(OrderedList.twoDays)) {
-			ListMessage += "```fix\nTwo Days:```\n";
-			for (var entry in OrderedList.twoDays) {
-				var obj = OrderedList.twoDays[entry];
-				ListMessage += EntryString(obj);
-			}
-			ListMessage += "\n";
-		}
-		if (!basic.isEmpty(OrderedList.three_to_sevenDays)) {
-			ListMessage += "```fix\nLess than week:```\n";
-			for (var entry in OrderedList.three_to_sevenDays) {
-				var obj = OrderedList.three_to_sevenDays[entry];
-				ListMessage += EntryString(obj);
-			}
-			ListMessage += "\n";
-		}
-		if (!basic.isEmpty(OrderedList.later)) {
-			ListMessage += "```fix\nLater:```\n";
+		});
+
+		if (!basic.isEmpty(OrderedList.later) && data.config.show_more_than_week) {
+			ListMessage += "```fix\n" + i18n.__("later") + ":```\n";
 			for (var entry in OrderedList.later) {
 				var obj = OrderedList.later[entry];
 				ListMessage += EntryString(obj);

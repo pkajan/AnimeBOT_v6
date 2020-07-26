@@ -4,5 +4,6 @@
     "activityName": "self",
     "token": "<token>",
     "logfile": "logs.txt",
-    "language": "en"
+    "language": "en",
+    "show_more_than_week": false
 }

@@ -33,5 +33,10 @@
 	"__alt_cmd__template": "__alt_cmd__template",
 	"__alt_cmd__test": "__alt_cmd__test",
 	"__alt_cmd__update": "__alt_cmd__update",
-	"cmd_onlinelist_msg_log": "List posted in channel [invoked by %s]"
+	"cmd_onlinelist_msg_log": "List posted in channel [invoked by %s]",
+	"today": "Today",
+	"tomorrow": "Tomorrow",
+	"two_days": "Two days",
+	"less_than_week": "Less than week",
+	"later": "Later"
 }
