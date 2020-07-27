@@ -9,7 +9,8 @@
 	"cmd_google_msg_log": "User: **%s** googled **%s**",
 	"set_status_log": "Status set to **%s:%s**",
 	"cmd_status_log": "User: **%s** changed status to **%s:%s**",
-	"websocket_err": "A websocket connection encountered an error: %s",
+	"websocket_err": "A websocket connection encountered an error: \n%s",
+	"error": "Error: \n%s",
 	"updateStarted": "Update started [invoked by %s]",
 	"updateEnded": "Update ended [invoked by %s]",
 	"ENOTFOUND": "Page not found (%s)[invoked by %s]",
@@ -33,10 +34,13 @@
 	"__alt_cmd__template": "__alt_cmd__template",
 	"__alt_cmd__test": "__alt_cmd__test",
 	"__alt_cmd__update": "__alt_cmd__update",
+	"__alt_cmd__restart": "reset;",
 	"cmd_onlinelist_msg_log": "List posted in channel [invoked by %s]",
 	"today": "Today",
 	"tomorrow": "Tomorrow",
 	"two_days": "Two days",
 	"less_than_week": "Less than week",
-	"later": "Later"
+	"later": "Later",
+	"cmd_test_log": "TEST [invoked by %s]",
+	"cmd_restart_log": "RESTART [invoked by %s]"
 }

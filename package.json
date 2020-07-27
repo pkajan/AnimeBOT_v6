@@ -38,7 +38,7 @@
       "app/",
       "data/"
     ],
-    "ext": "js json",
+    "ext": "js json reset",
     "delay": "5000"
   }
 }

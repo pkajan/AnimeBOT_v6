@@ -14,6 +14,7 @@ const commandFiles = fs.readdirSync('./app/commands').filter(file => file.endsWi
 for (const file of commandFiles) {
     const command = require(`../app/commands/${file}`);
     client.commands.set(command.name, command);
+
     command.altnames.split(";").forEach(element => {
         client.commands.set(element, command); // add alternative commands
     });
@@ -49,9 +50,17 @@ client.on('message', message => {
 
 })
 
+/* Error handling */
+client.on('error', error => {
+    log.error(i18n.__("----------"));
+    log.error(i18n.__("error", error));
+    log.error(i18n.__("----------"));
+});
 
 client.on('shardError', error => {
+    log.error(i18n.__("----------"));
     log.error(i18n.__("websocket_err", error));
+    log.error(i18n.__("----------"));
 });
 
 
