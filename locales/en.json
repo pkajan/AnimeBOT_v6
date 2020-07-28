@@ -16,6 +16,7 @@
 	"ENOTFOUND": "Page not found (%s)[invoked by %s]",
 	"pageExist_log": "Page '%s' EXIST [invoked by %s]",
 	"pageNOTExist_log": "Page '%s' NOT EXIST [invoked by %s]",
+	"pageNOTExist_err_log": "Page err: %s",
 	"pageExist_msg": "Url does exists! [<%s>]",
 	"pageNOTExist_msg": "Url does **NOT** exists! [<%s>]",
 	"NotURL_log": "NON valid URL '%s' [invoked by %s]",

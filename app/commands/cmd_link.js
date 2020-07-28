@@ -30,7 +30,11 @@ module.exports = {
 				})
 				.catch(err => {
 					log.info(i18n.__("pageNOTExist_log", args[0], data.message.author.username.toString()));
-					if (err.code != 'ENOTFOUND') log.error(i18n.__(`${err.code}`, err, data.message.author.username.toString()));
+					if (err.code != 'ENOTFOUND' && err.code != 'EAI_AGAIN') { //ENOTFOUND = not found | EAI_AGAIN = name resolution error
+						log.info(i18n.__("pageNOTExist_err_log", err.message));
+						log.info(i18n.__("pageNOTExist_err_log", data.message.author.username.toString()));
+						log.info(i18n.__("pageNOTExist_err_log", err.code));
+					}
 					data.message.channel.send(i18n.__("pageNOTExist_msg", args[0]));
 				});
 		}
