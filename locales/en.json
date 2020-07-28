@@ -42,5 +42,8 @@
 	"less_than_week": "Less than week",
 	"later": "Later",
 	"cmd_test_log": "TEST [invoked by %s]",
-	"cmd_restart_log": "RESTART [invoked by %s]"
+	"cmd_restart_log": "RESTART [invoked by %s]",
+	"activeCrons": "Active Cron Tasks [%s]",
+	"disabledCrons": "Crons DISABLED (in config)",
+	"startCrons": "Cron Tasks STARTED"
 }

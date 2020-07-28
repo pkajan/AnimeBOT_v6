@@ -1,10 +1,13 @@
 require('./i18n'); //load i18n settings
 const fs = require('fs-extra');
 const Discord = require('discord.js');
-const { prefix, token, activityType, activityName } = require('../config/config.json');
-const config = require('../config/config.json'); //file with config
 const log = require('./logger.js');
 const basic = require('./functions_basic');
+const crons = require('./crons.js');
+const config = require('../config/config.json'); //file with config
+const { prefix, token, activityType, activityName } = require('../config/config.json');
+
+
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 
 const client = new Discord.Client();
@@ -24,9 +27,13 @@ for (const file of commandFiles) {
 /* ON READY/start */
 client.once('ready', () => {
     log.info(i18n.__("ready"));
+    /* set status of the bot */
     client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
         .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
         .catch(e => log.error(e));
+
+    /* start cron tasks */
+    crons.cronStart();
 });
 
 /* ON MESSAGE */

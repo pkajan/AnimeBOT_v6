@@ -5,5 +5,6 @@
     "token": "<token>",
     "logfile": "logs.txt",
     "language": "en",
-    "show_more_than_week": false
+    "show_more_than_week": false,
+    "cron": false
 }
