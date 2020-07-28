@@ -57,12 +57,15 @@ client.on('error', error => {
     log.error(i18n.__("----------"));
     log.error(i18n.__("error", error));
     log.error(i18n.__("----------"));
+    console.log("Hello");
+    setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
 client.on('shardError', error => {
     log.error(i18n.__("----------"));
     log.error(i18n.__("websocket_err", error));
     log.error(i18n.__("----------"));
+    setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
 

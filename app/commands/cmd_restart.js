@@ -1,5 +1,6 @@
 const log = require('../logger.js');
 const fs = require('fs-extra');
+const basic = require('../functions_basic');
 
 module.exports = {
 	name: 'restart',
@@ -7,8 +8,6 @@ module.exports = {
 	description: 'Restart app.',
 	execute(data, args) {
         log.info(i18n.__("cmd_restart_log", data.message.author.username.toString()));
-		fs.writeFile(data.baseAppPATH + "\\data\\_.RESET", '', function (err) {
-			if (err) return log.error(err);
-		});
+		basic.resetNodemon();
 	},
 };

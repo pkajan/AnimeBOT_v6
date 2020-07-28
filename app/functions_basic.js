@@ -3,6 +3,7 @@ const util = require('util');
 const request = require('node-fetch');
 const date = require('date-and-time');
 const log = require('./logger.js');
+const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));;
 
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
@@ -68,4 +69,12 @@ module.exports.isEmpty = function (jsonObj) {
 // remove empty("" / '') and null from array
 module.exports.delEmpty = function (arr) {
     return arr.filter(function (e) { return e === 0 || e });
+};
+
+// restart sponsored by NODEMON
+module.exports.resetNodemon = function () {
+    console.log(baseAppPATH + "\\data\\_.RESET");
+    fs.writeFile(baseAppPATH + "\\data\\_.RESET", '', function (err) {
+        if (err) return log.error(err);
+    });
 };
