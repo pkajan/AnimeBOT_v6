@@ -4,7 +4,7 @@ date.plugin('ordinal');
 const log = require('../logger.js');
 const animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');
-const calc = require('../function_calculators.js');
+const calc = require('../functions_calculators.js');
 
 var OrderedList = { "today": {}, "tomorrow": {}, "twoDays": {}, "three_to_sevenDays": {}, "later": {} };
 
