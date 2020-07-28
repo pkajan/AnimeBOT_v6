@@ -64,3 +64,8 @@ module.exports.isEmpty = function (jsonObj) {
     for (var i in jsonObj) return false;
     return true;
 };
+
+// remove empty("" / '') and null from array
+module.exports.delEmpty = function (arr) {
+    return arr.filter(function (e) { return e === 0 || e });
+};

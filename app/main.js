@@ -15,7 +15,8 @@ for (const file of commandFiles) {
     const command = require(`../app/commands/${file}`);
     client.commands.set(command.name, command);
 
-    command.altnames.split(";").forEach(element => {
+    var alternativeCMD = basic.delEmpty(command.altnames.split(";")); // remove empty from array to prevent command assignment to empty string
+    alternativeCMD.forEach(element => {
         client.commands.set(element, command); // add alternative commands
     });
 }
@@ -37,6 +38,7 @@ client.on('message', message => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
+    if (basic.isEmpty(command)) return; // empty command
 
     var data = { "message": message, "client": client, "config": config, "prefix": prefix, "baseAppPATH": baseAppPATH };
 
@@ -45,7 +47,7 @@ client.on('message', message => {
         log.info(i18n.__("commandPASS", command));
         client.commands.get(command).execute(data, args);
     } else {
-        log.info(i18n.__("commandNaN"));
+        log.info(i18n.__("commandNaN", command));
     }
 
 })
