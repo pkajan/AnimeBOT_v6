@@ -1,5 +1,4 @@
 const log = require('../logger.js');
-const fs = require('fs-extra');
 const basic = require('../functions_basic');
 
 module.exports = {

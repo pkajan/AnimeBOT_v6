@@ -10,6 +10,7 @@ const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+/* read files with commands and put it into array */
 const commandFiles = fs.readdirSync('./app/commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`../app/commands/${file}`);
@@ -17,15 +18,10 @@ for (const file of commandFiles) {
 
     var alternativeCMD = basic.delEmpty(command.altnames.split(";")); // remove empty from array to prevent command assignment to empty string
     alternativeCMD.forEach(element => {
-        client.commands.set(element, command); // add alternative commands
+        client.commands.set(element, command); // add alternative command names
     });
 }
-/*console.log("Command list:");
-console.log(commandFiles.map(x => {
-    return x.replace('.js', '');
-}));
-*/
-//global.i18n = i18n;
+/* ON READY/start */
 client.once('ready', () => {
     log.info(i18n.__("ready"));
     client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
@@ -33,6 +29,7 @@ client.once('ready', () => {
         .catch(e => log.error(e));
 });
 
+/* ON MESSAGE */
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots
 
@@ -67,6 +64,5 @@ client.on('shardError', error => {
     log.error(i18n.__("----------"));
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
-
 
 client.login(token);

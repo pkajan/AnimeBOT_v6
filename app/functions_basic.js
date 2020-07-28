@@ -1,7 +1,5 @@
 const fs = require('fs-extra');
-const util = require('util');
 const request = require('node-fetch');
-const date = require('date-and-time');
 const log = require('./logger.js');
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));;
 
