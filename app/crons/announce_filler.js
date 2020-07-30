@@ -13,7 +13,7 @@ function task() {
     var tmpPath = __dirname.substring(0, __dirname.lastIndexOf('\\'));
     var realPath = tmpPath.substring(0, tmpPath.lastIndexOf('\\')) + '//announce.json';
 
-    const job = new CronJob(`*/1 * * * *`, function () {
+    const job = new CronJob(`*/10 * * * *`, function () {
         for (var i in animes) {
             var entryDate = date.parse(`${animes[`${i}`].year}-${calc.fixDubleDigits(animes[`${i}`].month)}-${calc.fixDubleDigits(animes[`${i}`].day)}`, 'YYYY-MM-DD');
             var newData = calc.NewRelease(entryDate, 7, parseInt(animes[`${i}`]._starting_episode) - parseInt(animes[`${i}`]._skipped_episodes), animes[`${i}`]._last_episode);
