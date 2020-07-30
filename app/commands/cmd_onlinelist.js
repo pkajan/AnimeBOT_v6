@@ -79,6 +79,5 @@ module.exports = {
 		}
 		data.message.channel.send(ListMessage);
 		log.info(i18n.__("cmd_onlinelist_msg_log", data.message.author.username.toString()));
-
 	},
 };

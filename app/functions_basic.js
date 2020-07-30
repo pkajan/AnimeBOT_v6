@@ -24,6 +24,9 @@ module.exports.JSON_read = function (filename) {
     var data;
     try {
         data = fs.readFileSync(filename, 'utf8').toString(); //read data
+        if (data == "") {
+            data = "{}";
+        }
     } catch (err) {
         if (err.code === 'ENOENT') {
             log.info(i18n.__("FileNotFound", filename));

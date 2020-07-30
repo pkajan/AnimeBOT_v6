@@ -1,4 +1,5 @@
 const log = require('../logger.js');
+const basic = require('../functions_basic.js');
 
 module.exports = {
 	name: 'test',

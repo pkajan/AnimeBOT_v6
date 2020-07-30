@@ -46,5 +46,7 @@
 	"cmd_restart_log": "RESTART [invoked by %s]",
 	"activeCrons": "Active Cron Tasks [%s]",
 	"disabledCrons": "Crons DISABLED (in config)",
-	"startCrons": "Cron Tasks STARTED"
+	"startCrons": "Cron Tasks STARTED",
+	"cron_started": "Cron started: %s",
+	"cron_1_add": "%s ep:%s added to announce."
 }
