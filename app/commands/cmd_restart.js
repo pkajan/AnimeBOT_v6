@@ -6,7 +6,7 @@ module.exports = {
 	altnames: i18n.__("__alt_cmd__restart"),
 	description: 'Restart app.',
 	execute(data, args) {
-        log.info(i18n.__("cmd_restart_log", data.message.author.username.toString()));
+		log.info(i18n.__("cmd_restart_log", data.message.author.username.toString()));
 		basic.resetNodemon();
 	},
 };

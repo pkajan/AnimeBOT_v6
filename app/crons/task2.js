@@ -2,6 +2,7 @@ const log = require('../logger.js');
 const fetch = require('node-fetch');
 const announce = require('../../announce.json');
 const basic = require('../functions_basic.js');
+const discord = require('../functions_discord.js');
 var path = require('path');
 var scriptName = path.basename(__filename).substring(0, path.basename(__filename).lastIndexOf('.js'));
 
@@ -31,13 +32,10 @@ const CronJob = require('cron').CronJob;
 function task() {
 
     const job = new CronJob(`*/1 * * * *`, function () {
+        //discord.sendMSGID('662202681531564042',"skuska 123 456 789");
         for (var i in announce) {
             var entry = announce[i];
-            /*console.log(entry.name);
-            console.log(entry.link);
-            console.log(entry.checkTo);*/
             checker(entry.checkTo, entry.name, entry.picture);
-            console.log("----------------");
         }
     });
     job.start();

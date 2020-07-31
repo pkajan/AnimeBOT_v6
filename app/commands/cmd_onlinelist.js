@@ -4,6 +4,7 @@ date.plugin('ordinal');
 const log = require('../logger.js');
 const animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');
+const discord = require('../functions_discord');
 const calc = require('../functions_calculators.js');
 
 var OrderedList = { "today": {}, "tomorrow": {}, "twoDays": {}, "three_to_sevenDays": {}, "later": {} };
@@ -77,7 +78,7 @@ module.exports = {
 			}
 			ListMessage += "\n";
 		}
-		data.message.channel.send(ListMessage);
+		discord.replyMSG(data.message, ListMessage);
 		log.info(i18n.__("cmd_onlinelist_msg_log", data.message.author.username.toString()));
 	},
 };

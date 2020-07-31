@@ -1,4 +1,5 @@
 const log = require('../logger.js');
+const discord = require('../functions_discord');
 
 module.exports = {
 	name: 'say',
@@ -8,11 +9,10 @@ module.exports = {
 		if (args.length > 0) {
 			const sayMessage = args.join(" ");
 			// And we get the bot to say the thing:
-			//discord.MSGReply(message, sayMessage);
-			data.message.channel.send(sayMessage);
+			discord.replyMSG(data.message, sayMessage);
 			log.info(i18n.__("cmd_say_msg", data.message.author.username.toString(), sayMessage));
 		} else {
-			data.message.channel.send(i18n.__("cmd_say_empty", data.prefix));
+			discord.replyMSG(data.message, i18n.__("cmd_say_empty", data.prefix));
 			log.info(i18n.__("cmd_say_empty_log"));
 		}
 	},

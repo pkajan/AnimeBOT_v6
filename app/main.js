@@ -11,6 +11,7 @@ const { prefix, token, activityType, activityName } = require('../config/config.
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 
 const client = new Discord.Client();
+global.client = client; //usage outside of the box
 client.commands = new Discord.Collection();
 
 /* read files with commands and put it into array */

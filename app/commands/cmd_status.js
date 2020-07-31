@@ -1,6 +1,5 @@
 const log = require('../logger.js');
 const fcb = require('../functions_basic.js');
-
 const config_path = './config/config.json';
 
 
