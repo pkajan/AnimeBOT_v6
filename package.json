@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "preinstall": "npm i -g nodemon",
+    "preinstall": "npm i -g nodemon && npm i -g npm-check-updates",
     "start": "node index.js"
   },
   "keywords": [

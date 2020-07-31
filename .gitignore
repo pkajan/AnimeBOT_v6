@@ -1,5 +1,4 @@
 node_modules/
-package-lock.json
 config/config.json
 data/replies.json
 data/anime.json
