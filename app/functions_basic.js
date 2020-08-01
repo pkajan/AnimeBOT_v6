@@ -6,6 +6,7 @@ const date = require('date-and-time');
 require('date-and-time/plugin/ordinal');
 date.plugin('ordinal');
 const calc = require('../app/functions_calculators.js');
+
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
     return any_string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
@@ -52,7 +53,7 @@ module.exports.JSON_edit = function (filename, elem, data) {
 module.exports.JSON_remove = function (filename, elem) {
     var obj = this.JSON_read(filename); //read data
     delete obj[`${elem}`]; // remove element
-    fs.writeFileSync(filename, JSON.stringify(obj)); // write back to file
+    fs.writeFileSync(filename, JSON.stringify(obj, null, 4)); // write back to file
 };
 
 //ASYNC write into file
@@ -62,6 +63,11 @@ module.exports.fwASYNC = function (filepath, data) {
         function (err) {
             if (err) { throw err; }
         });
+};
+
+//SYNC read file to string
+module.exports.readSYNC = function (filepath) {
+    return fs.readFileSync(filepath, 'utf8');
 };
 
 //test if json object is empty
@@ -91,13 +97,12 @@ module.exports.announceFill = function (animes, realPath) {
         var name = i;
         var dayDiff = parseInt(newData.differenceDAYS);
         var link = this.parse(animes[`${i}`].link, newData.startEP);
-        var checkTo = this.parse(animes[`${i}`].checkTo, newData.startEP);
         var picture = animes[`${i}`].picture;
         var ep = newData.startEP;
-        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture, "checkTo": checkTo };
+        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture};
 
         if (dayDiff == 0) {
-            this.JSON_edit(realPath, name, tmpDATA);
+            this.JSON_edit(realPath, `${name}-ep${ep}`, tmpDATA);
             log.info(i18n.__("cron_1_add", name, ep));
         }
     }

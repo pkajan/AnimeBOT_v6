@@ -9,6 +9,8 @@ const { prefix, token, activityType, activityName } = require('../config/config.
 const animes = require('../data/anime.json');
 
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
+basic.fwASYNC(baseAppPATH + '//announce.json',"");
+basic.fwASYNC(baseAppPATH + '//announceFIN.txt',"");
 
 const client = new Discord.Client();
 global.client = client; //usage outside of the box

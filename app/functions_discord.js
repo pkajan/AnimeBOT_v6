@@ -3,8 +3,8 @@ const log = require('./logger.js');
 const client = global.client;
 
 //description: 'Send message to channel with given ID'
-module.exports.sendMSGID = function (channelID, MSGText) {
-    client.channels.cache.get(channelID).send(MSGText);
+module.exports.sendMSGID = function (channelID, MSGText, stuff=null) {
+    client.channels.cache.get(channelID).send(MSGText, stuff);
 };
 
 //description: 'Send reply to same channel'
