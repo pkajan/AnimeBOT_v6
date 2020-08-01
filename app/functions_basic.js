@@ -2,7 +2,10 @@ const fs = require('fs-extra');
 const request = require('node-fetch');
 const log = require('./logger.js');
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));;
-
+const date = require('date-and-time');
+require('date-and-time/plugin/ordinal');
+date.plugin('ordinal');
+const calc = require('../app/functions_calculators.js');
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
     return any_string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
@@ -79,3 +82,30 @@ module.exports.resetNodemon = function () {
         if (err) return log.error(err);
     });
 };
+
+// announce filler
+module.exports.announceFill = function (animes, realPath) {
+    for (var i in animes) {
+        var entryDate = date.parse(`${animes[`${i}`].year}-${calc.fixDubleDigits(animes[`${i}`].month)}-${calc.fixDubleDigits(animes[`${i}`].day)}`, 'YYYY-MM-DD');
+        var newData = calc.NewRelease(entryDate, 7, parseInt(animes[`${i}`]._starting_episode) - parseInt(animes[`${i}`]._skipped_episodes), animes[`${i}`]._last_episode);
+        var name = i;
+        var dayDiff = parseInt(newData.differenceDAYS);
+        var link = this.parse(animes[`${i}`].link, newData.startEP);
+        var checkTo = this.parse(animes[`${i}`].checkTo, newData.startEP);
+        var picture = animes[`${i}`].picture;
+        var ep = newData.startEP;
+        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture, "checkTo": checkTo };
+
+        if (dayDiff == 0) {
+            this.JSON_edit(realPath, name, tmpDATA);
+            log.info(i18n.__("cron_1_add", name, ep));
+        }
+    }
+};
+
+
+
+
+
+
+

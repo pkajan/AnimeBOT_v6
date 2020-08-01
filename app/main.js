@@ -6,7 +6,7 @@ const basic = require('./functions_basic');
 const crons = require('./crons.js');
 const config = require('../config/config.json'); //file with config
 const { prefix, token, activityType, activityName } = require('../config/config.json');
-
+const animes = require('../data/anime.json');
 
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 
@@ -35,6 +35,9 @@ client.once('ready', () => {
 
     /* start cron tasks */
     crons.cronStart();
+
+    /* fill announce file */
+    basic.announceFill(animes, baseAppPATH + '//announce.json')
 });
 
 /* ON MESSAGE */
