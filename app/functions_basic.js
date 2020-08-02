@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const request = require('node-fetch');
+const fetch = require('node-fetch');
 const log = require('./logger.js');
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));;
 const date = require('date-and-time');
@@ -19,8 +19,11 @@ module.exports.parse = function (str, arg) {
 
 //Download url content
 module.exports.download = function (url, destination) {
-    request(url)
-        .pipe(fs.createWriteStream(destination));
+    fetch(url)
+        .then(res => {
+            const dest = fs.createWriteStream(destination);
+            res.body.pipe(dest)
+        });
 };
 
 //read JSON and return results as object
@@ -99,7 +102,7 @@ module.exports.announceFill = function (animes, realPath) {
         var link = this.parse(animes[`${i}`].link, newData.startEP);
         var picture = animes[`${i}`].picture;
         var ep = newData.startEP;
-        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture};
+        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture };
 
         if (dayDiff == 0) {
             this.JSON_edit(realPath, `${name}-ep${ep}`, tmpDATA);
