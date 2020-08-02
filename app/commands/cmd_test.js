@@ -4,7 +4,7 @@ const discord = require('../functions_discord');
 
 module.exports = {
 	name: 'test',
-	altnames: i18n.__("__alt_cmd__test"),
+	altnames: i18n.__({ phrase: "__alt_cmd__test", locale: "custom" }),
 	description: 'only test',
 	execute(data, args) {
 		discord.replyMSG(data.message, 'beep.');

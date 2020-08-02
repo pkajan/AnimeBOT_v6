@@ -3,7 +3,7 @@ const discord = require('../functions_discord');
 
 module.exports = {
 	name: 'google',
-	altnames: i18n.__("__alt_cmd__google"),
+	altnames: i18n.__({ phrase: "__alt_cmd__google", locale: "custom" }),
 	description: 'send google link into chat',
 	execute(data, args) {
 		const search_string = args.join("+");

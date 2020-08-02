@@ -2,7 +2,7 @@ const log = require('../logger.js');
 
 module.exports = {
 	name: 'template',
-	altnames: i18n.__("__alt_cmd__template"),
+	altnames: i18n.__({ phrase: "__alt_cmd__template", locale: "custom" }),
 	description: 'template - do nothing just be there...',
 	execute(data, args) {
 		//message.channel.send('beep.');

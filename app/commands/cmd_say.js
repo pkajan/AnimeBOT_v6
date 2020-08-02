@@ -3,7 +3,7 @@ const discord = require('../functions_discord');
 
 module.exports = {
 	name: 'say',
-	altnames: i18n.__("__alt_cmd__say"),
+	altnames: i18n.__({ phrase: "__alt_cmd__say", locale: "custom" }),
 	description: 'force bot to say your words',
 	execute(data, args) {
 		if (args.length > 0) {

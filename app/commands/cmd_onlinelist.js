@@ -11,7 +11,7 @@ var OrderedList = { "today": {}, "tomorrow": {}, "twoDays": {}, "three_to_sevenD
 
 module.exports = {
 	name: 'onlinelist',
-	altnames: i18n.__("__alt_cmd__onlinelist"),
+	altnames: i18n.__({ phrase: "__alt_cmd__onlinelist", locale: "custom" }),
 	description: 'manualy initiate anime list update',
 	execute(data, args) {
 		for (var i in animes) {
