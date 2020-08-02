@@ -16,5 +16,5 @@ module.exports.cronStart = function () {
             require('./crons/' + filename);
         });
         log.info(i18n.__("startCrons"));
-    }, 5000);
+    }, 1000);
 };

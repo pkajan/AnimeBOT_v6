@@ -6,5 +6,6 @@
 	"__alt_cmd__say": "__alt_cmd__say",
 	"__alt_cmd__status": "__alt_cmd__status",
 	"__alt_cmd__test": "__alt_cmd__test",
-	"__alt_cmd__update": "__alt_cmd__update"
+	"__alt_cmd__update": "__alt_cmd__update",
+	"__alt_cmd__forcecheck": "__alt_cmd__forcecheck"
 } 
