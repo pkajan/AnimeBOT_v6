@@ -6,5 +6,10 @@
     "logfile": "logs.txt",
     "language": "en",
     "show_more_than_week": false,
-    "cron": false
+    "cron": true,
+    "announceIDs": "channelID;anotherID;",
+    "onlineList": {
+        "download": false,
+        "url": "url with online json of animelist"
+    }
 }
