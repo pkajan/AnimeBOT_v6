@@ -115,5 +115,29 @@ module.exports.announceFill = function (animes, realPath) {
 
 
 
+// check if given link exist on internet
+module.exports.checker = function (name, link, ep, picture) {
+    const knownErr = [
+        `<h1 class="entry-title">404</h1>`, //gogoanime
+        `somethingSomethingDarkSide`, //another web
+        `somethingSomethinglightSide` //another web
+    ];
+    return new Promise(resolve => {
+        resolve(
+            fetch(`${link}`)
+                .then(res => res)
+                .then(data => {
+                    var html = data.body._outBuffer.toString();
+                    var code = data.status;
 
-
+                    if (knownErr.some(r => html.includes(r)) && (code >= 200 & code <= 300)) {
+                        return { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
+                    }
+                    if (code >= 200 & code <= 300) {
+                        return { "pass": true, 'name': name, 'link': link, 'ep': ep, "picture": picture };
+                    }
+                    return { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
+                })
+        );
+    });
+};
