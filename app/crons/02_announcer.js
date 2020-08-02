@@ -24,7 +24,11 @@ function task() {
                     log.info(i18n.__("cron_2_wait", `${result.name}-ep${result.ep}`));
                     return;
                 }
-                if (basic.readSYNC(realPath + '//announceFIN.txt').includes(result.link)) return;
+                if (basic.readSYNC(realPath + '//announceFIN.txt').includes(result.link)) {
+                    basic.JSON_remove(realPath + '//announce.json', `${result.name}-ep${result.ep}`); //if already posted remove
+                    log.info(i18n.__("cron_2_success_repeated", `${result.name}-ep${result.ep}`));
+                    return;
+                };
                 basic.delEmpty(announceIDs.split(";")).forEach(element => {
                     discord.sendMSGID(element, postMessage(result), { files: [result.picture] });
                     basic.JSON_remove(realPath + '//announce.json', `${result.name}-ep${result.ep}`);
