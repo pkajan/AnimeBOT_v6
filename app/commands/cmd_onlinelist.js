@@ -78,7 +78,7 @@ module.exports = {
 			}
 			ListMessage += "\n";
 		}
-		discord.replyMSG(data.message, ListMessage);
+		discord.selfDestructReply(data.message, ListMessage, null, 15000);
 		log.info(i18n.__("cmd_onlinelist_msg_log", data.message.author.username.toString()));
 	},
 };

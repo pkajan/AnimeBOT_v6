@@ -3,13 +3,13 @@ const log = require('./logger.js');
 const client = global.client;
 
 //description: 'Send message to channel with given ID'
-module.exports.sendMSGID = function (channelID, MSGText, stuff=null) {
-    client.channels.cache.get(channelID).send(MSGText, stuff);
+module.exports.sendMSGID = function (channelID, MSGText, stuff = null) {
+    client.channels.cache.get(channelID).send(MSGText, stuff).catch(error => log.error(error));
 };
 
 //description: 'Send reply to same channel'
 module.exports.replyMSG = function (message, reply_text, additional = null) {
-    message.channel.send(reply_text, additional);
+    message.channel.send(reply_text, additional).catch(error => log.error(error));
 };
 
 //description: 'Remove invoking message'
@@ -18,20 +18,15 @@ module.exports.removeCallMSG = function (message) {
 };
 
 //description: 'Send and remove message in X seconds'
-module.exports.selfDestructMSG = function (message, MSGText, time, cmd_name = null) {
-    message.channel.send(MSGText).then(sentMessage => {
+module.exports.selfDestructReply = function (message, reply_text, additional = null, time) {
+    message.channel.send(reply_text, additional).then(sentMessage => {
         sentMessage.delete({ timeout: time, reason: 'It had to be done.' }).catch(error => log.error(error));
     });
 };
 
 //description: 'Send and remove message in X seconds (from given channel)'
-module.exports.selfDestructMSGID = function (channelID, MSGText, time, user = null, cmd_name = null) {
-    if (MSGText == "" || MSGText == null || MSGText == "\n") {
-        log.info("msg_empty");
-    } else {
-        client.channels.get(channelID).send(MSGText).then(sentMessage => {
-            sentMessage.delete(time).catch(error => log.error(error));
-        });
-        log.info("send_selfdestructid");
-    }
+module.exports.selfDestructMSGID = function (channelID, MSGText, stuff = null, time) {
+    client.channels.cache.get(channelID).send(MSGText, stuff).then(sentMessage => {
+        sentMessage.delete({ timeout: time, reason: 'It had to be done.' });
+    }).catch(error => log.error(error));
 };
