@@ -1,6 +1,7 @@
 require('./i18n'); //load i18n settings
 const fs = require('fs-extra');
 const Discord = require('discord.js');
+const discord = require('./functions_discord');
 const log = require('./logger.js');
 const basic = require('./functions_basic');
 const crons = require('./crons.js');
@@ -56,6 +57,7 @@ client.on('message', message => {
     if (client.commands.has(command)) {
         log.info(i18n.__("commandPASS", command));
         client.commands.get(command).execute(data, args);
+        discord.removeCallMSG(message); // remove command call
     } else {
         log.info(i18n.__("commandNaN", command));
     }

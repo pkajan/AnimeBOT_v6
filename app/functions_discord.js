@@ -14,7 +14,6 @@ module.exports.replyMSG = function (message, reply_text, additional = null) {
 
 //description: 'Remove invoking message'
 module.exports.removeCallMSG = function (message) {
-    //message.delete().catch(error => log.error(error));
     message.delete({ timeout: 1000, reason: 'It had to be done.' }).catch(error => log.error(error));
 };
 
