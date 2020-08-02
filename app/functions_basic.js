@@ -111,10 +111,6 @@ module.exports.announceFill = function (animes, realPath) {
     }
 };
 
-
-
-
-
 // check if given link exist on internet
 module.exports.checker = function (name, link, ep, picture) {
     const knownErr = [
