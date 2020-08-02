@@ -5,5 +5,6 @@ const { language } = require('../config/config.json');
 i18n.configure({
     directory: __dirname + '/../locales',
     defaultLocale: language,
+    fallbacks: { 'custom': 'default' },
 });
 global.i18n = i18n;

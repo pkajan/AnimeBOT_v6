@@ -13,3 +13,4 @@ images/*.webm
 images/*.png
 data/anime.json
 data/replies.json
+locales/custom.json
