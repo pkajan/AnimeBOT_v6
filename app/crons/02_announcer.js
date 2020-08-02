@@ -6,6 +6,7 @@ const discord = require('../functions_discord.js');
 const { announceIDs } = require('../../config/config.json');
 var path = require('path');
 const { resolve } = require('path');
+const cronSettings= `*/20 * * * *`;
 var scriptName = path.basename(__filename).substring(0, path.basename(__filename).lastIndexOf('.js'));
 
 function checker(name, link, ep, picture) {
@@ -39,7 +40,7 @@ function task() {
     postMessage = (obj) => { return `\`\`\`fix\n ${obj.name} => ep${obj.ep} \`\`\`\n<${obj.link}>\n`; };
     var tmpPath = __dirname.substring(0, __dirname.lastIndexOf('\\'));
     var realPath = tmpPath.substring(0, tmpPath.lastIndexOf('\\'));
-    const job = new CronJob(`*/1 * * * *`, function () {
+    const job = new CronJob(cronSettings, function () {
         for (var i in announce) {
             var entry = announce[i];
             async function asyncCall() {
@@ -61,4 +62,4 @@ function task() {
 }
 
 task(); // start task
-log.info(i18n.__("cron_started", scriptName));
+log.info(i18n.__("cron_started", scriptName, cronSettings));
