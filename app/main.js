@@ -9,8 +9,8 @@ const { prefix, token, activityType, activityName } = require('../config/config.
 const animes = require('../data/anime.json');
 
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
-basic.fwASYNC(baseAppPATH + '//announce.json',"");
-basic.fwASYNC(baseAppPATH + '//announceFIN.txt',"");
+basic.fwASYNC(baseAppPATH + '//announce.json', "");
+basic.fwASYNC(baseAppPATH + '//announceFIN.txt', "");
 
 const client = new Discord.Client();
 global.client = client; //usage outside of the box
@@ -64,17 +64,17 @@ client.on('message', message => {
 
 /* Error handling */
 client.on('error', error => {
-    log.error(i18n.__("----------"));
+    log.error("----------");
     log.error(i18n.__("error", error));
-    log.error(i18n.__("----------"));
+    log.error("----------");
     console.log("Hello");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
 client.on('shardError', error => {
-    log.error(i18n.__("----------"));
+    log.error("----------");
     log.error(i18n.__("websocket_err", error));
-    log.error(i18n.__("----------"));
+    log.error("----------");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
