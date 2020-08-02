@@ -6,7 +6,7 @@ const discord = require('../functions_discord.js');
 const { announceIDs } = require('../../config/config.json');
 var path = require('path');
 const { resolve } = require('path');
-const cronSettings= `*/20 * * * *`;
+const cronSettings = `*/20 * * * *`;
 var scriptName = path.basename(__filename).substring(0, path.basename(__filename).lastIndexOf('.js'));
 
 function checker(name, link, ep, picture) {
@@ -48,12 +48,12 @@ function task() {
                 if (!result.pass) return;
                 if (basic.readSYNC(realPath + '//announceFIN.txt').includes(result.link)) return;
                 basic.delEmpty(announceIDs.split(";")).forEach(element => {
-                    console.log(element);
                     discord.sendMSGID(element, postMessage(result), { files: [result.picture] });
                     basic.JSON_remove(realPath + '//announce.json', `${result.name}-ep${result.ep}`);
-                    log.info(`${result.name}-ep${result.ep}` + " removed from announce");
-                    basic.fwASYNC(realPath + '//announceFIN.txt', result.link + '\n');
+                    log.info(i18n.__("cron_2_success", `${result.name}-ep${result.ep}`, element));
                 });
+                log.info(i18n.__("cron_2_removed", `${result.name}-ep${result.ep}`));
+                basic.fwASYNC(realPath + '//announceFIN.txt', result.link + '\n');
             }
             asyncCall();
         }

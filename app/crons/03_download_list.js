@@ -13,6 +13,7 @@ function task() {
     const job = new CronJob(cronSettings, function () {
         if (onlineList.download == true) {
             basic.download(onlineList.url, realPath);
+            log.info("cron_3_success");
         }
     });
     job.start();

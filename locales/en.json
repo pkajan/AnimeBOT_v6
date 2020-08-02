@@ -34,5 +34,8 @@
 	"disabledCrons": "Crons DISABLED (in config)",
 	"startCrons": "Cron Tasks STARTED",
 	"cron_started": "Cron started: %s (%s)",
-	"cron_1_add": "%s ep:%s added to announce."
+	"cron_1_add": "%s ep:%s added to announce.",
+	"cron_2_success": "%s posted into channel: %s",
+	"cron_2_removed": "%s removed from announce",
+	"cron_3_success": "Download of animelist"
 }
