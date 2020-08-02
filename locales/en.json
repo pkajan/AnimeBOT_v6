@@ -37,5 +37,6 @@
 	"cron_1_add": "%s ep:%s added to announce.",
 	"cron_2_success": "%s posted into channel: %s",
 	"cron_2_removed": "%s removed from announce",
+	"cron_2_wait": "Waiting for %s",
 	"cron_3_success": "Download of animelist"
 }

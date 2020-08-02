@@ -1,7 +1,7 @@
 require('./i18n'); //load i18n settings
 const fs = require('fs-extra');
 const Discord = require('discord.js');
-const discord = require('./functions_discord');
+const discordfc = require('./functions_discord');
 const log = require('./logger.js');
 const basic = require('./functions_basic');
 const crons = require('./crons.js');
@@ -10,11 +10,11 @@ const { prefix, token, activityType, activityName } = require('../config/config.
 const animes = require('../data/anime.json');
 
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
-basic.fwASYNC(baseAppPATH + '//announce.json', "");
-basic.fwASYNC(baseAppPATH + '//announceFIN.txt', "");
+basic.announceFill(animes, baseAppPATH + '//announce.json'); // fill announce file
+basic.fwSYNC(baseAppPATH + '//announceFIN.txt', "", "A");
+
 
 const client = new Discord.Client();
-global.client = client; //usage outside of the box
 client.commands = new Discord.Collection();
 
 /* read files with commands and put it into array */
@@ -38,9 +38,6 @@ client.once('ready', () => {
 
     /* start cron tasks */
     crons.cronStart();
-
-    /* fill announce file */
-    basic.announceFill(animes, baseAppPATH + '//announce.json')
 });
 
 /* ON MESSAGE */
@@ -57,7 +54,7 @@ client.on('message', message => {
     if (client.commands.has(command)) {
         log.info(i18n.__("commandPASS", command));
         client.commands.get(command).execute(data, args);
-        discord.removeCallMSG(message); // remove command call
+        discordfc.removeCallMSG(message); // remove command call
     } else {
         log.info(i18n.__("commandNaN", command));
     }
@@ -69,7 +66,6 @@ client.on('error', error => {
     log.error("----------");
     log.error(i18n.__("error", error));
     log.error("----------");
-    console.log("Hello");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
@@ -81,3 +77,4 @@ client.on('shardError', error => {
 });
 
 client.login(token);
+global.client = client; //usage outside of the box

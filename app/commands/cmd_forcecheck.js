@@ -1,6 +1,6 @@
 const log = require('../logger.js');
 const discord = require('../functions_discord');
-const announce = require('../../announce.json');
+var announce = require('../../announce.json');
 const basic = require('../functions_basic.js');
 const { announceIDs } = require('../../config/config.json');
 
@@ -12,12 +12,16 @@ module.exports = {
 		postMessage = (obj) => { return `\`\`\`fix\n ${obj.name} => ep${obj.ep} \`\`\`\n<${obj.link}>\n`; };
 		var tmpPath = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 		var realPath = tmpPath.substring(0, tmpPath.lastIndexOf('\\'));
-
+		delete require.cache[require.resolve('../../announce.json')]   // Deleting loaded module
+		announce = require('../../announce.json');
 		for (var i in announce) {
 			var entry = announce[i];
 			async function asyncCall() {
 				var result = await basic.checker(entry.name, entry.link, entry.ep, entry.picture);
-				if (!result.pass) return;
+				if (!result.pass) {
+					log.info(i18n.__("cron_2_wait", `${result.name}-ep${result.ep}`));
+					return;
+				}
 				if (basic.readSYNC(realPath + '//announceFIN.txt').includes(result.link)) return;
 				basic.delEmpty(announceIDs.split(";")).forEach(element => {
 					discord.sendMSGID(element, postMessage(result), { files: [result.picture] });

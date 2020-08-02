@@ -68,6 +68,17 @@ module.exports.fwASYNC = function (filepath, data) {
         });
 };
 
+//SYNC write into file
+module.exports.fwSYNC = function (filepath, data, type = null) {
+    switch (type) {
+        case ("A"): //append
+            fs.appendFileSync(filepath, data, null);
+            break;
+        default:
+            fs.writeFileSync(filepath, data, null);
+    }
+};
+
 //SYNC read file to string
 module.exports.readSYNC = function (filepath) {
     return fs.readFileSync(filepath, 'utf8');
