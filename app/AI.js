@@ -28,4 +28,18 @@ module.exports.AIStart = function (message) {
         log.info(i18n.__("AI_reply_greetings", message.author.username.toString()));
         return;
     }
+
+    if (msg_part.some(el => invoke.goodnights.includes(basic.deunicode(el)))) { //goodnights
+        discord.replyMSG(message, basic.pickRandom(replies.goodnights));
+        log.info(i18n.__("AI_reply_goodnights", message.author.username.toString()));
+        return;
+    }
+
+    if (msg_part.some(el => invoke.goodbyes.includes(basic.deunicode(el)))
+        || invoke.goodbyes.includes(basic.deunicode(`${message_array[0]} ${message_array[1]}`))
+        || invoke.goodbyes.includes(basic.deunicode(`${message_array[0]} ${message_array[1]} ${message_array[2]}`))) { //goodbyes
+        discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
+        log.info(i18n.__("AI_reply_goodbyes", message.author.username.toString()));
+        return;
+    }
 };
