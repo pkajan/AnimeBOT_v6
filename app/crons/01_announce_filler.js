@@ -1,5 +1,5 @@
 const log = require('../logger.js');
-const animes = require('../../data/anime.json');
+var animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');
 var path = require('path');
 const cronSettings = `5 2 * * *`;
@@ -11,6 +11,8 @@ function task() {
     var realPath = tmpPath.substring(0, tmpPath.lastIndexOf('\\')) + '//announce.json';
 
     const job = new CronJob(cronSettings, function () {
+        delete require.cache[require.resolve('../../data/anime.json')]   // Deleting loaded module
+        animes = require('../../data/anime.json');
         basic.announceFill(animes, realPath);
     });
     job.start();

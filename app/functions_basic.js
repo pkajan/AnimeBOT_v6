@@ -134,6 +134,10 @@ module.exports.checker = function (name, link, ep, picture) {
             fetch(`${link}`)
                 .then(res => res)
                 .then(data => {
+                    console
+                    if (typeof data.body._outBuffer == 'undefined') {
+                        return { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
+                    }
                     var html = data.body._outBuffer.toString();
                     var code = data.status;
 
