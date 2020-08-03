@@ -12,7 +12,7 @@ date.plugin('ordinal');
 module.exports.AIStart = function (message) {
     var now = date.format(new Date(), 'H'); // actual hour
     var message_array = message.content.split(/ +/);
-    var msg_part = [message_array[0], message_array[1], message_array[2]]; // max first 3 words
+    var msg_part = basic.delEmpty([message_array[0], message_array[1], message_array[2]]); // max first 3 words
 
     if (msg_part.some(el => invoke.greetings.includes(basic.deunicode(el)))) { //greetings
         switch (now) {
