@@ -5,6 +5,7 @@ const discordfc = require('./functions_discord');
 const log = require('./logger.js');
 const basic = require('./functions_basic');
 const crons = require('./crons.js');
+const AI = require('./AI.js');
 const config = require('../config/config.json'); //file with config
 const { prefix, token, activityType, activityName } = require('../config/config.json');
 const animes = require('../data/anime.json');
@@ -58,8 +59,17 @@ client.on('message', message => {
     } else {
         log.info(i18n.__("commandNaN", command));
     }
+});
 
-})
+if (AI) { /* ON MESSAGE AI branch*/
+    client.on('message', message => {
+        if (message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots and pre commands
+        AI.AIStart(message);
+    });
+} else {
+    log.info(i18n.__("disabledAI"));
+}
+
 
 /* Error handling */
 client.on('error', error => {

@@ -152,3 +152,8 @@ module.exports.checker = function (name, link, ep, picture) {
         );
     });
 };
+
+// return random element from array
+module.exports.pickRandom = function (arr) {
+    return arr[(Math.random() * arr.length) | 0]
+};

@@ -30,6 +30,7 @@
     "ignore": [
       "package-lock.json",
       "*.txt",
+      "*.example",
       ".git",
       "node_modules/*"
     ],

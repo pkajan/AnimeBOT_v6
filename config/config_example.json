@@ -11,5 +11,6 @@
     "onlineList": {
         "download": false,
         "url": "url with online json of animelist"
-    }
+    },
+    "AI": false
 }

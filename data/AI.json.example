@@ -1,0 +1,57 @@
+{
+    "invoke": {
+        "greetings": [
+            "hello",
+            "morning",
+            "hi"
+        ],
+        "goodbyes": [],
+        "goodnights": [
+            "gn",
+            "bye",
+            "sya",
+            "seeya"
+        ]
+    },
+    "replies": {
+        "greetings": [
+            "Greetings",
+            "Howdy",
+            "Bonjour",
+            "Buenos dias",
+            "Good day",
+            "Good morning",
+            "Hey",
+            "Hi-ya",
+            "How are you",
+            "Howdy-do",
+            "Shalom",
+            "What's happening?"
+        ],
+        "greetings_morning": [
+            "morning"
+        ],
+        "greetings_evening": [
+            "evening"
+        ],
+        "goodbyes": [],
+        "goodnights": []
+    },
+    "exceptions": [
+        "http",
+        "shit",
+        ":",
+        "whois",
+        "ichigo",
+        "bullshit",
+        "bol",
+        "this",
+        "his"
+    ],
+    "exceptions_learning": [
+        "http",
+        "ftp",
+        "magnet:",
+        "<@"
+    ]
+}

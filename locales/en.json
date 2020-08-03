@@ -39,5 +39,7 @@
 	"cron_2_success_repeated": "%s was already posted.",
 	"cron_2_removed": "%s removed from announce",
 	"cron_2_wait": "Waiting for %s",
-	"cron_3_success": "Download of animelist"
+	"cron_3_success": "Download of animelist",
+	"disabledAI": "AI DISABLED (in config)",
+	"AI_reply_greetings": "AI greeted %s"
 }
