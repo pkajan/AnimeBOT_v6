@@ -14,7 +14,7 @@ module.exports.AIStart = function (message) {
     var message_array = message.content.split(/ +/);
     var msg_part = [message_array[0], message_array[1], message_array[2]]; // max first 3 words
 
-    if (msg_part.some(el => invoke.greetings.includes(el))) { //greetings
+    if (msg_part.some(el => invoke.greetings.includes(basic.deunicode(el)))) { //greetings
         switch (now) {
             case (now >= 0 && now <= 9): //morning
                 discord.replyMSG(message, basic.pickRandom(replies.greetings_morning));
