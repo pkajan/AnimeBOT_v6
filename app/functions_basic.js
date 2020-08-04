@@ -129,26 +129,31 @@ module.exports.checker = function (name, link, ep, picture) {
         `somethingSomethingDarkSide`, //another web
         `somethingSomethinglightSide` //another web
     ];
+    const exist = { "pass": true, 'name': name, 'link': link, 'ep': ep, "picture": picture };
+    const notexist = { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
+    async function asyncCall() {
+        var code = await fetch(link)
+            .then(res => res.status)
+            .catch(err => log.error(`${name}, ${err.code}, ${link}`));
+        if(typeof code == 'undefined') return notexist; // if page doesnt exist dont waste time trying to get html...
+        var html = await fetch(link)
+            .then(res => res.text())
+            .then(body => body)
+            .catch(err => log.error(`${name}, ${err.code}, ${link}`));
+
+        if (!(code >= 200 & code <= 300)) return notexist;
+        if (knownErr.some(r => html.includes(r))) {
+            return notexist;
+        }
+        if (code >= 200 & code <= 300) {
+            return exist;
+        }
+        return notexist;
+    }
+
     return new Promise(resolve => {
         resolve(
-            fetch(`${link}`)
-                .then(res => res)
-                .then(data => {
-                    console
-                    if (typeof data.body._outBuffer == 'undefined') {
-                        return { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
-                    }
-                    var html = data.body._outBuffer.toString();
-                    var code = data.status;
-
-                    if (knownErr.some(r => html.includes(r)) && (code >= 200 & code <= 300)) {
-                        return { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
-                    }
-                    if (code >= 200 & code <= 300) {
-                        return { "pass": true, 'name': name, 'link': link, 'ep': ep, "picture": picture };
-                    }
-                    return { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
-                })
+            asyncCall()
         );
     });
 };
