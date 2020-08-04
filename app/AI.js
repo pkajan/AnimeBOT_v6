@@ -14,7 +14,9 @@ module.exports.AIStart = function (message) {
     var message_array = message.content.split(/ +/);
     var msg_part = basic.delEmpty([message_array[0], message_array[1], message_array[2]]); // max first 3 words
 
-    if (msg_part.some(el => invoke.greetings.includes(basic.deunicode(el)))) { //greetings
+    if (msg_part.some(el => invoke.greetings.includes(basic.deunicode(el)))
+        || invoke.greetings.includes(basic.deunicode(`${message_array[0]} ${message_array[1]}`))
+        || invoke.greetings.includes(basic.deunicode(`${message_array[0]} ${message_array[1]} ${message_array[2]}`))) { //greetings
         switch (true) {
             case (now >= 0 && now <= 9): //morning
                 discord.replyMSG(message, basic.pickRandom(replies.greetings_morning));
@@ -29,7 +31,9 @@ module.exports.AIStart = function (message) {
         return;
     }
 
-    if (msg_part.some(el => invoke.goodnights.includes(basic.deunicode(el)))) { //goodnights
+    if (msg_part.some(el => invoke.goodnights.includes(basic.deunicode(el)))
+        || invoke.goodnights.includes(basic.deunicode(`${message_array[0]} ${message_array[1]}`))
+        || invoke.goodnights.includes(basic.deunicode(`${message_array[0]} ${message_array[1]} ${message_array[2]}`))) { //goodnights
         discord.replyMSG(message, basic.pickRandom(replies.goodnights));
         log.info(i18n.__("AI_reply_goodnights", message.author.username.toString()));
         return;
