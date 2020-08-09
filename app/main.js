@@ -14,7 +14,6 @@ const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 basic.announceFill(animes, baseAppPATH + '//announce.json'); // fill announce file
 basic.fwSYNC(baseAppPATH + '//announceFIN.txt', "", "A");
 
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -30,16 +29,23 @@ for (const file of commandFiles) {
     });
 }
 /* ON READY/start */
-client.once('ready', () => {
-    log.info(i18n.__("ready"));
-    /* set status of the bot */
-    client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
-        .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
-        .catch(e => log.error(e));
+try {
+    client.once('ready', () => {
+        log.info(i18n.__("ready"));
+        /* set status of the bot */
+        client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
+            .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
+            .catch(e => log.error(e));
 
-    /* start cron tasks */
-    crons.cronStart();
-});
+        /* start cron tasks */
+        crons.cronStart();
+    });
+} catch (err) {
+    log.error("----------");
+    log.error(i18n.__("error", err));
+    log.error("----------");
+}
+
 
 /* ON MESSAGE */
 client.on('message', message => {
@@ -72,16 +78,16 @@ if (AI) { /* ON MESSAGE AI branch*/
 
 
 /* Error handling */
-client.on('error', error => {
+client.on('error', err => {
     log.error("----------");
-    log.error(i18n.__("error", error));
+    log.error(i18n.__("error", err));
     log.error("----------");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
-client.on('shardError', error => {
+client.on('shardError', err => {
     log.error("----------");
-    log.error(i18n.__("websocket_err", error));
+    log.error(i18n.__("websocket_err", err));
     log.error("----------");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
