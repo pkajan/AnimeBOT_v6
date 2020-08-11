@@ -12,38 +12,42 @@ date.plugin('ordinal');
 module.exports.AIStart = function (message) {
     var now = date.format(new Date(), 'H'); // actual hour
     var message_array = message.content.toLowerCase().split(/ +/);
-    var msg_part = basic.delEmpty([message_array[0], message_array[1], message_array[2]]); // max first 3 words
+    var msg_part = basic.delEmpty([basic.deunicode(message_array[0]), basic.deunicode(message_array[1]), basic.deunicode(message_array[2]), basic.deunicode(message_array[3])]); // max first 4 words
 
-    if (msg_part.some(el => invoke.greetings.includes(basic.deunicode(el)))
-        || invoke.greetings.includes(basic.deunicode(`${message_array[0]} ${message_array[1]}`))
-        || invoke.greetings.includes(basic.deunicode(`${message_array[0]} ${message_array[1]} ${message_array[2]}`))) { //greetings
-        switch (true) {
-            case (now >= 0 && now <= 9): //morning
-                discord.replyMSG(message, basic.pickRandom(replies.greetings_morning));
-                break;
-            case (now > 18 && now <= 23): //evening
-                discord.replyMSG(message, basic.pickRandom(replies.greetings_evening));
-                break;
-            default: //generic
-                discord.replyMSG(message, basic.pickRandom(replies.greetings));
+    invoke.greetings.forEach(val => { //greetings
+        var regx = new RegExp(`${val}`);
+        if (regx.test(msg_part)) {
+            switch (true) {
+                case (now >= 0 && now <= 9): //morning
+                    discord.replyMSG(message, basic.pickRandom(replies.greetings_morning));
+                    break;
+                case (now > 18 && now <= 23): //evening
+                    discord.replyMSG(message, basic.pickRandom(replies.greetings_evening));
+                    break;
+                default: //generic
+                    discord.replyMSG(message, basic.pickRandom(replies.greetings));
+            }
+            log.info(i18n.__("AI_reply_greetings", message.author.username.toString()));
+            return;
         }
-        log.info(i18n.__("AI_reply_greetings", message.author.username.toString()));
-        return;
-    }
+    });
 
-    if (msg_part.some(el => invoke.goodnights.includes(basic.deunicode(el)))
-        || invoke.goodnights.includes(basic.deunicode(`${message_array[0]} ${message_array[1]}`))
-        || invoke.goodnights.includes(basic.deunicode(`${message_array[0]} ${message_array[1]} ${message_array[2]}`))) { //goodnights
-        discord.replyMSG(message, basic.pickRandom(replies.goodnights));
-        log.info(i18n.__("AI_reply_goodnights", message.author.username.toString()));
-        return;
-    }
+    invoke.goodnights.forEach(val => { //goodnights
+        var regx = new RegExp(`${val}`);
+        if (regx.test(msg_part)) {
+            discord.replyMSG(message, basic.pickRandom(replies.goodnights));
+            log.info(i18n.__("AI_reply_goodnights", message.author.username.toString()));
+            return;
+        }
+    });
 
-    if (msg_part.some(el => invoke.goodbyes.includes(basic.deunicode(el)))
-        || invoke.goodbyes.includes(basic.deunicode(`${message_array[0]} ${message_array[1]}`))
-        || invoke.goodbyes.includes(basic.deunicode(`${message_array[0]} ${message_array[1]} ${message_array[2]}`))) { //goodbyes
-        discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
-        log.info(i18n.__("AI_reply_goodbyes", message.author.username.toString()));
-        return;
-    }
+    invoke.goodbyes.forEach(val => { //goodbyes
+        var regx = new RegExp(`${val}`);
+        if (regx.test(msg_part)) {
+            discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
+            log.info(i18n.__("AI_reply_goodbyes", message.author.username.toString()));
+            return;
+        }
+    });
+
 };

@@ -9,7 +9,7 @@ const calc = require('../app/functions_calculators.js');
 
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
-    return any_string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    return `${any_string}`.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 };
 
 //description: 'parse strings with %s'
