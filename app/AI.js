@@ -27,7 +27,7 @@ module.exports.AIStart = function (message) {
                 default: //generic
                     discord.replyMSG(message, basic.pickRandom(replies.greetings));
             }
-            log.info(i18n.__("AI_reply_greetings", message.author.username.toString()));
+            log.info(i18n.__("AI_reply_greetings", message.author.username.toString(), val, msg_part.join(" ")));
             return;
         }
     });
@@ -36,7 +36,7 @@ module.exports.AIStart = function (message) {
         var regx = new RegExp(`${val}`);
         if (regx.test(msg_part)) {
             discord.replyMSG(message, basic.pickRandom(replies.goodnights));
-            log.info(i18n.__("AI_reply_goodnights", message.author.username.toString()));
+            log.info(i18n.__("AI_reply_goodnights", message.author.username.toString(), val, msg_part.join(" ")));
             return;
         }
     });
@@ -45,7 +45,7 @@ module.exports.AIStart = function (message) {
         var regx = new RegExp(`${val}`);
         if (regx.test(msg_part)) {
             discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
-            log.info(i18n.__("AI_reply_goodbyes", message.author.username.toString()));
+            log.info(i18n.__("AI_reply_goodbyes", message.author.username.toString(), val, msg_part.join(" ")));
             return;
         }
     });
