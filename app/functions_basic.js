@@ -115,7 +115,7 @@ module.exports.announceFill = function (animes, realPath) {
         var ep = newData.startEP;
         var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture };
 
-        if (dayDiff == 0) {
+        if (dayDiff == 0 && ep < parseInt(animes[`${i}`]._last_episode)) {
             this.JSON_edit(realPath, `${name}-ep${ep}`, tmpDATA);
             log.info(i18n.__("cron_1_add", name, ep));
         }
@@ -135,7 +135,7 @@ module.exports.checker = function (name, link, ep, picture) {
         var code = await fetch(link)
             .then(res => res.status)
             .catch(err => log.error(`${name}, ${err.code}, ${link}`));
-        if(typeof code == 'undefined') return notexist; // if page doesnt exist dont waste time trying to get html...
+        if (typeof code == 'undefined') return notexist; // if page doesnt exist dont waste time trying to get html...
         var html = await fetch(link)
             .then(res => res.text())
             .then(body => body)
