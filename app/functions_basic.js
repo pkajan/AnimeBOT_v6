@@ -113,7 +113,8 @@ module.exports.announceFill = function (animes, realPath) {
         var link = this.parse(animes[`${i}`].link, newData.startEP);
         var picture = animes[`${i}`].picture;
         var ep = newData.startEP;
-        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture };
+        var ended = (ep > animes[`${i}`]._last_episode ? true : false);
+        var tmpDATA = { 'name': name, 'link': link, 'ep': ep, "picture": picture, "ended": ended };
 
         if (dayDiff == 0 && ep < parseInt(animes[`${i}`]._last_episode)) {
             this.JSON_edit(realPath, `${name}-ep${ep}`, tmpDATA);

@@ -23,10 +23,11 @@ module.exports = {
 			var newDate = newData.newDate;
 			var ep = newData.startEP;
 			var tmpDATA = { 'name': name, 'link': link, 'ep': ep, 'newDate': newDate, 'dayDiff': dayDiff };
+			var ended = (ep > animes[`${i}`]._last_episode ? true : false);
 
 			//sorting
 			switch (true) {
-				case (dayDiff < 0): //ended
+				case (ended || dayDiff < 0): //anime ended, do nothing
 					//code
 					break;
 				case (dayDiff == 0): //today
