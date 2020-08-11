@@ -92,7 +92,7 @@ module.exports.isEmpty = function (jsonObj) {
 
 // remove empty("" / '') and null from array
 module.exports.delEmpty = function (arr) {
-    return arr.filter(function (e) { return e === 0 || e });
+    return arr.filter(function (e) { return e === 0 || e }).filter(val => val !== "undefined");
 };
 
 // restart sponsored by NODEMON
