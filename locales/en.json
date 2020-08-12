@@ -43,5 +43,6 @@
 	"disabledAI": "AI DISABLED (in config)",
 	"AI_reply_greetings": "AI greeted %s (regEx: `%s` ¦ string: `%s`)",
 	"AI_reply_goodnights": "AI good night %s (regEx: `%s` ¦ string: `%s`)",
-	"AI_reply_goodbyes": "AI goodbye %s (regEx: `%s` ¦ string: `%s`)"
+	"AI_reply_goodbyes": "AI goodbye %s (regEx: `%s` ¦ string: `%s`)",
+	"cmd_log_msg_log": "Log file send to %s"
 }
