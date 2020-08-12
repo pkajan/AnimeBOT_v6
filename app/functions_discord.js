@@ -29,3 +29,8 @@ module.exports.selfDestructReply = function (message, reply_text, additional = n
         sentMessage.delete({ timeout: time, reason: 'It had to be done.' }).catch(error => log.error(error));
     });
 };
+
+//description: 'Send PM'
+module.exports.sendPM = function (message, reply_text, additional = null) {
+    message.author.send(reply_text,additional).catch(error => log.error(error));
+};
