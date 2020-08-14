@@ -161,5 +161,21 @@ module.exports.checker = function (name, link, ep, picture) {
 
 // return random element from array
 module.exports.pickRandom = function (arr) {
-    return arr[(Math.random() * arr.length) | 0]
+    return arr[(Math.random() * arr.length) | 0];
+};
+
+// return true or false based on percentage chance
+module.exports.percentChance = function (percent) {
+    return (parseInt(Math.random() * 100)) >= (100 - percent) ? true : false;
+};
+
+// return all files from given folder as array
+module.exports.filesInFolder = function (directory, remove = null) {
+    var tmp = fs.readdirSync(directory).filter(arrayItem => arrayItem !== "info.txt");
+    var returningArray = [];
+    tmp.forEach(value => {
+        returningArray.push(directory + "\\" + value);
+    });
+
+    return returningArray;
 };

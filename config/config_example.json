@@ -12,5 +12,7 @@
         "download": false,
         "url": "url with online json of animelist"
     },
-    "AI": false
+    "AI": false,
+    "AI_percentChance": 20,
+    "AIpercentChance_img": 30
 }

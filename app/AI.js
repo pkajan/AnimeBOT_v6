@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const log = require('./logger.js');
 const discord = require('../app/functions_discord.js');
 const basic = require('../app/functions_basic.js');
-const { invoke, replies, exceptions } = require('../data/AI.json');
+const { invoke, replies, exceptions, AIpercentChance, AIpercentChance_img } = require('../data/AI.json');
 const date = require('date-and-time');
 require('date-and-time/plugin/ordinal');
 date.plugin('ordinal');
@@ -50,4 +50,15 @@ module.exports.AIStart = function (message) {
         }
     });
 
+    /* RANDOM responses */
+    if (basic.percentChance(AIpercentChance)) {
+
+        if (basic.percentChance(AIpercentChance_img)) {
+            //post image
+        } else {
+            //post message
+            //discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
+        }
+    }
+    console.table(global.images);
 };

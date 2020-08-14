@@ -94,3 +94,4 @@ client.on('shardError', err => {
 
 client.login(token);
 global.client = client; //usage outside of the box
+global.images = basic.filesInFolder(process.cwd() + "\\images");
