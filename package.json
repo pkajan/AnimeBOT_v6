@@ -27,17 +27,17 @@
   "nodemonConfig": {
     "verbose": true,
     "restartable": "rs",
+    "watch": [
+      "locales/",
+      "app/",
+      "data/"
+    ],
     "ignore": [
       "package-lock.json",
       "*.txt",
       "*.example",
       ".git",
       "node_modules/*"
-    ],
-    "watch": [
-      "locales/",
-      "app/",
-      "data/"
     ],
     "ext": "js json reset",
     "delay": "5000"

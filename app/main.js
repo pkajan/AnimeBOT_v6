@@ -10,9 +10,10 @@ const config = require('../config/config.json'); //file with config
 const { prefix, token, activityType, activityName } = require('../config/config.json');
 const animes = require('../data/anime.json');
 
-const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
+const baseAppPATH = process.cwd();
 basic.announceFill(animes, baseAppPATH + '//announce.json'); // fill announce file
 basic.fwSYNC(baseAppPATH + '//announceFIN.txt', "", "A");
+basic.fwSYNC(baseAppPATH + '//data//responses.txt', "", "A");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -94,4 +95,5 @@ client.on('shardError', err => {
 
 client.login(token);
 global.client = client; //usage outside of the box
-global.images = basic.filesInFolder(process.cwd() + "\\images");
+global.images = basic.filesInFolder(baseAppPATH + "\\images");
+global.txtResponses = basic.delEmpty(basic.readSYNC(baseAppPATH + '\\data\\responses.txt').split("\n"));

@@ -176,6 +176,5 @@ module.exports.filesInFolder = function (directory, remove = null) {
     tmp.forEach(value => {
         returningArray.push(directory + "\\" + value);
     });
-
     return returningArray;
 };

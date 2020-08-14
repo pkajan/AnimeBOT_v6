@@ -2,11 +2,12 @@ const fs = require('fs-extra');
 const log = require('./logger.js');
 const discord = require('../app/functions_discord.js');
 const basic = require('../app/functions_basic.js');
-const { invoke, replies, exceptions, AIpercentChance, AIpercentChance_img } = require('../data/AI.json');
+const { invoke, replies, exceptions } = require('../data/AI.json');
+const { AI_percentChance, AI_percentChance_img } = require('../config/config.json');
 const date = require('date-and-time');
 require('date-and-time/plugin/ordinal');
 date.plugin('ordinal');
-
+var msgPost = true;
 
 //description: 'start AI tasks'
 module.exports.AIStart = function (message) {
@@ -51,14 +52,23 @@ module.exports.AIStart = function (message) {
     });
 
     /* RANDOM responses */
-    if (basic.percentChance(AIpercentChance)) {
-
-        if (basic.percentChance(AIpercentChance_img)) {
+    if (global.images.length == 0) AI_percentChance_img = 0;
+    if (global.txtResponses.length == 0) msgPost = false;
+    if (basic.percentChance(AI_percentChance)) {
+        if (basic.percentChance(AI_percentChance_img)) {
             //post image
-        } else {
+            var img = basic.pickRandom(global.images);
+            discord.replyMSG(message, null, {
+                files: [{
+                    attachment: img,
+                    name: img.substring(img.lastIndexOf('/') + 1 | img.lastIndexOf('\\') + 1)
+                }]
+            });
+            log.info(i18n.__("AI_Autoreply_img", message.author.username.toString()));
+        } else if (msgPost) {
             //post message
-            //discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
+            discord.replyMSG(message, basic.parse(basic.pickRandom(global.txtResponses), message.author.username.toString()));
+            log.info(i18n.__("AI_Autoreply_msg", message.author.username.toString()));
         }
     }
-    console.table(global.images);
 };
