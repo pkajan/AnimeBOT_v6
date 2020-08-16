@@ -11,6 +11,22 @@ var msgPost = true;
 
 //description: 'start AI tasks'
 module.exports.AIStart = function (message) {
+
+    /* exceptions handling */
+    var StopAI = false;
+    exceptions.forEach(val => {
+        var regx = new RegExp(`${val}`);
+        if (regx.test(message.content.toLowerCase())) {
+            StopAI = true;
+            return;
+        }
+    });
+
+    if (StopAI) {
+        StopAI = false; //stop further actions if exception was found
+        return;
+    }
+
     var now = date.format(new Date(), 'H'); // actual hour
     var message_array = message.content.toLowerCase().split(/ +/);
     var msg_part = basic.delEmpty([basic.deunicode(message_array[0]), basic.deunicode(message_array[1]), basic.deunicode(message_array[2]), basic.deunicode(message_array[3])]); // max first 4 words
