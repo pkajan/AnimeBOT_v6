@@ -45,6 +45,7 @@ module.exports.AIStart = function (message) {
                     discord.replyMSG(message, basic.pickRandom(replies.greetings));
             }
             log.info(i18n.__("AI_reply_greetings", message.author.username.toString(), val, msg_part.join(" ")));
+            StopAI = true; //stop rng
             return;
         }
     });
@@ -54,6 +55,7 @@ module.exports.AIStart = function (message) {
         if (regx.test(msg_part)) {
             discord.replyMSG(message, basic.pickRandom(replies.goodnights));
             log.info(i18n.__("AI_reply_goodnights", message.author.username.toString(), val, msg_part.join(" ")));
+            StopAI = true; //stop rng
             return;
         }
     });
@@ -63,6 +65,7 @@ module.exports.AIStart = function (message) {
         if (regx.test(msg_part)) {
             discord.replyMSG(message, basic.pickRandom(replies.goodbyes));
             log.info(i18n.__("AI_reply_goodbyes", message.author.username.toString(), val, msg_part.join(" ")));
+            StopAI = true; //stop rng
             return;
         }
     });
@@ -70,6 +73,8 @@ module.exports.AIStart = function (message) {
     /* RANDOM responses */
     if (global.images.length == 0) AI_percentChance_img = 0;
     if (global.txtResponses.length == 0) msgPost = false;
+    if (StopAI) return; //stop further actions
+
     if (basic.percentChance(AI_percentChance)) {
         if (basic.percentChance(AI_percentChance_img)) {
             //post image
