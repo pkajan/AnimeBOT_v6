@@ -9,7 +9,7 @@ require('date-and-time/plugin/ordinal');
 date.plugin('ordinal');
 var msgPost = true;
 
-function rngPost(message) {
+function rngPost(message, respname = "") {
     if (basic.percentChance(AI_percentChance_img)) {
         //post image
         var img = basic.pickRandom(global.images);
@@ -19,11 +19,11 @@ function rngPost(message) {
                 name: img.substring(img.lastIndexOf('/') + 1 | img.lastIndexOf('\\') + 1)
             }]
         });
-        log.info(i18n.__("AI_Autoreply_img", message.author.username.toString()));
+        log.info(i18n.__("AI_Autoreply_img" + respname, message.author.username.toString()));
     } else if (msgPost) {
         //post message
         discord.replyMSG(message, basic.parse(basic.pickRandom(global.txtResponses), message.author.username.toString()));
-        log.info(i18n.__("AI_Autoreply_msg", message.author.username.toString()));
+        log.info(i18n.__("AI_Autoreply_msg" + respname, message.author.username.toString()));
     }
 }
 
@@ -90,7 +90,7 @@ module.exports.AIStart = function (message) {
 
     /* BOT name mention */
     if (message.content.toLowerCase().indexOf(global.client.user.username.slice(0, -nameSlice).toLowerCase()) > -1) {
-        rngPost(message);
+        rngPost(message, "_name");
         StopAI = true; //stop rng
         return;
     }
