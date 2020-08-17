@@ -32,7 +32,7 @@ for (const file of commandFiles) {
 /* ON READY/start */
 try {
     client.once('ready', () => {
-        log.info(i18n.__("ready"));
+        log.info(i18n.__("ready", client.user.username));
         /* set status of the bot */
         client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
             .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
