@@ -43,7 +43,7 @@ try {
     });
 } catch (err) {
     log.error("----------");
-    log.error(i18n.__("error", err));
+    log.error(i18n.__("error", JSON.stringify(err)));
     log.error("----------");
 }
 
@@ -81,14 +81,14 @@ if (AI) { /* ON MESSAGE AI branch*/
 /* Error handling */
 client.on('error', err => {
     log.error("----------");
-    log.error(i18n.__("error", err));
+    log.error(i18n.__("error", JSON.stringify(err)));
     log.error("----------");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
 client.on('shardError', err => {
     log.error("----------");
-    log.error(i18n.__("websocket_err", err));
+    log.error(i18n.__("websocket_err", JSON.stringify(err)));
     log.error("----------");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
