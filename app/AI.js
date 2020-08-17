@@ -101,6 +101,6 @@ module.exports.AIStart = function (message) {
     if (StopAI) return; //stop further actions
 
     if (basic.percentChance(AI_percentChance)) {
-        rngPost();
+        rngPost(message);
     }
 };
