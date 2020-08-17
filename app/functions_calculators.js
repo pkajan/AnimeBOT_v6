@@ -1,7 +1,7 @@
 const log = require('./logger.js');
 const date = require('date-and-time');
-require('date-and-time/plugin/ordinal');
-date.plugin('ordinal');
+const ordinal = require('date-and-time/plugin/ordinal');
+date.plugin(ordinal);
 
 //description: 'add set amount of days to timeobject'
 module.exports.addDays = function (timeobj, number) {

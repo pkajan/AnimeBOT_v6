@@ -5,8 +5,8 @@ const basic = require('../app/functions_basic.js');
 const { invoke, replies, exceptions } = require('../data/AI.json');
 const { AI_percentChance, AI_percentChance_img, nameSlice } = require('../config/config.json');
 const date = require('date-and-time');
-require('date-and-time/plugin/ordinal');
-date.plugin('ordinal');
+const ordinal = require('date-and-time/plugin/ordinal');
+date.plugin(ordinal);
 var msgPost = true;
 
 function rngPost(message, respname = "") {

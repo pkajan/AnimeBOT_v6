@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 const log = require('./logger.js');
 const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));;
 const date = require('date-and-time');
-require('date-and-time/plugin/ordinal');
-date.plugin('ordinal');
+const ordinal = require('date-and-time/plugin/ordinal');
+date.plugin(ordinal);
 const calc = require('../app/functions_calculators.js');
 
 //description: 'remove accents/diacritics'

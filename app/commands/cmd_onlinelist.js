@@ -1,6 +1,6 @@
 const date = require('date-and-time');
-require('date-and-time/plugin/ordinal');
-date.plugin('ordinal');
+const ordinal = require('date-and-time/plugin/ordinal');
+date.plugin(ordinal);
 const log = require('../logger.js');
 const animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');
