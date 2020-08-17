@@ -3,11 +3,29 @@ const log = require('./logger.js');
 const discord = require('../app/functions_discord.js');
 const basic = require('../app/functions_basic.js');
 const { invoke, replies, exceptions } = require('../data/AI.json');
-const { AI_percentChance, AI_percentChance_img } = require('../config/config.json');
+const { AI_percentChance, AI_percentChance_img, nameSlice } = require('../config/config.json');
 const date = require('date-and-time');
 require('date-and-time/plugin/ordinal');
 date.plugin('ordinal');
 var msgPost = true;
+
+function rngPost(message) {
+    if (basic.percentChance(AI_percentChance_img)) {
+        //post image
+        var img = basic.pickRandom(global.images);
+        discord.replyMSG(message, null, {
+            files: [{
+                attachment: img,
+                name: img.substring(img.lastIndexOf('/') + 1 | img.lastIndexOf('\\') + 1)
+            }]
+        });
+        log.info(i18n.__("AI_Autoreply_img", message.author.username.toString()));
+    } else if (msgPost) {
+        //post message
+        discord.replyMSG(message, basic.parse(basic.pickRandom(global.txtResponses), message.author.username.toString()));
+        log.info(i18n.__("AI_Autoreply_msg", message.author.username.toString()));
+    }
+}
 
 //description: 'start AI tasks'
 module.exports.AIStart = function (message) {
@@ -70,26 +88,19 @@ module.exports.AIStart = function (message) {
         }
     });
 
+    /* BOT name mention */
+    if (message.content.toLowerCase().indexOf(global.client.user.username.slice(0, -nameSlice).toLowerCase()) > -1) {
+        rngPost(message);
+        StopAI = true; //stop rng
+        return;
+    }
+
     /* RANDOM responses */
     if (global.images.length == 0) AI_percentChance_img = 0;
     if (global.txtResponses.length == 0) msgPost = false;
     if (StopAI) return; //stop further actions
 
     if (basic.percentChance(AI_percentChance)) {
-        if (basic.percentChance(AI_percentChance_img)) {
-            //post image
-            var img = basic.pickRandom(global.images);
-            discord.replyMSG(message, null, {
-                files: [{
-                    attachment: img,
-                    name: img.substring(img.lastIndexOf('/') + 1 | img.lastIndexOf('\\') + 1)
-                }]
-            });
-            log.info(i18n.__("AI_Autoreply_img", message.author.username.toString()));
-        } else if (msgPost) {
-            //post message
-            discord.replyMSG(message, basic.parse(basic.pickRandom(global.txtResponses), message.author.username.toString()));
-            log.info(i18n.__("AI_Autoreply_msg", message.author.username.toString()));
-        }
+        rngPost();
     }
 };
