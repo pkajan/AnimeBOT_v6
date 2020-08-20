@@ -1,3 +1,6 @@
+const netTest = require('./internet_test.js');
+netTest.tryInternet("https://1.1.1.1"); // wait till internet is UP
+
 require('./i18n'); //load i18n settings
 const fs = require('fs-extra');
 const Discord = require('discord.js');
@@ -30,23 +33,16 @@ for (const file of commandFiles) {
     });
 }
 /* ON READY/start */
-try {
-    client.once('ready', () => {
-        log.info(i18n.__("ready", client.user.username));
-        /* set status of the bot */
-        client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
-            .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
-            .catch(e => log.error(e));
+client.once('ready', () => {
+    log.info(i18n.__("ready", client.user.username));
+    /* set status of the bot */
+    client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
+        .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
+        .catch(e => log.error(e));
 
-        /* start cron tasks */
-        crons.cronStart();
-    });
-} catch (err) {
-    log.error("----------");
-    log.error(i18n.__("error", JSON.stringify(err)));
-    log.error("----------");
-}
-
+    /* start cron tasks */
+    crons.cronStart();
+});
 
 /* ON MESSAGE */
 client.on('message', message => {

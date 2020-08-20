@@ -10,6 +10,7 @@
     "fs-extra": "^9.0.1",
     "i18n": "^0.12.0",
     "node-fetch": "^2.6.0",
+    "retus": "^1.1.2",
     "simple-node-logger": "^18.12.24"
   },
   "devDependencies": {},

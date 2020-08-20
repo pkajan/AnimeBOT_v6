@@ -48,5 +48,7 @@
 	"AI_Autoreply_msg": "Automatic random reply to %s with message.",
 	"AI_Autoreply_img": "Automatic random reply to %s with image.",
 	"AI_Autoreply_msg_name": "Name mention reply to %s with message.",
-	"AI_Autoreply_img_name": "Name mention reply to %s with image."
+	"AI_Autoreply_img_name": "Name mention reply to %s with image.",
+	"InternetUP": "Internet UP, restarting.",
+	"InternetDown": "Internet DOWN, waiting..."
 }
