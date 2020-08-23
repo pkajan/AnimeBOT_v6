@@ -89,14 +89,14 @@ client.on('shardError', err => {
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', err => {
     log.error("-----unhandledRejection-----");
     log.error(i18n.__("error", JSON.stringify(err)));
     log.error("----------");
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
-process.on('UnhandledPromiseRejectionWarning', error => {
+process.on('UnhandledPromiseRejectionWarning', err => {
     log.error("-----UnhandledPromiseRejectionWarning-----");
     log.error(i18n.__("error", JSON.stringify(err)));
     log.error("----------");
