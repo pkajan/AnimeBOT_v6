@@ -8,9 +8,10 @@ const discordfc = require('./functions_discord');
 const log = require('./logger.js');
 const basic = require('./functions_basic');
 const crons = require('./crons.js');
-const AI = require('./AI.js');
+const AI_function = require('./AI.js');
+const stalking_function = require('./stalking.js');
 const config = require('../config/config.json'); //file with config
-const { prefix, token, activityType, activityName } = require('../config/config.json');
+const { prefix, token, activityType, activityName, AI, stalking } = require('../config/config.json');
 const animes = require('../data/anime.json');
 
 const baseAppPATH = process.cwd();
@@ -64,15 +65,24 @@ client.on('message', message => {
     }
 });
 
-if (AI) { /* ON MESSAGE AI branch*/
+if (AI) { /* ON MESSAGE AI branch */
     client.on('message', message => {
         if (message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots and pre commands
-        AI.AIStart(message);
+        AI_function.AIStart(message);
     });
+    log.info(i18n.__("enabledAI"));
 } else {
     log.info(i18n.__("disabledAI"));
 }
 
+if (stalking) { /* stalking users */
+    client.on('presenceUpdate', (oldPresence, newPresence) => {
+        stalking_function.StalkingStart(oldPresence, newPresence);
+    });
+    log.info(i18n.__("enabledStalking"));
+} else {
+    log.info(i18n.__("disabledStalking"));
+}
 
 /* Error handling */
 client.on('error', err => {
