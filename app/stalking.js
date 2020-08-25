@@ -13,22 +13,24 @@ module.exports.StalkingStart = function (oldPresence, newPresence) {
     async function getName() {
         var tmp = (oldPresence) ? oldPresence.userID : newPresence.userID; // use user ID from OLD if possible
         return client.users.fetch(tmp).then(user => {
-            return user.username;
+            return user;
         });
     }
-    getName().then(UserName => {
-        if ((newPresence.activities).length < 1) {
-            if (typeof (userStatus[UserName]) != 'undefined') {
-                discord.sendMSGID(stalkingPosterChannelID, `${UserName} \`stoped\` ${userStatus[UserName].activitytype} => **${userStatus[UserName].activityname}**`);
-                log.info(i18n.__("stalking_stop", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
-                userStatus[UserName] = { "activitytype": null, "activityname": null };
-            }
-        } else {
+    getName().then(user => {
+        if (user.bot) return; //ignore bots
+        var UserName = user.username;
+
+        if ((newPresence.activities).length >= 1) {
             newPresence.activities.forEach(activity => {
                 userStatus[UserName] = { "activitytype": activity.type, "activityname": activity.name };
                 discord.sendMSGID(stalkingPosterChannelID, `${UserName} \`started\` ${userStatus[UserName].activitytype} => **${userStatus[UserName].activityname}**`);
                 log.info(i18n.__("stalking_start", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
             });
+        } else {
+            if (typeof (userStatus[UserName].activitytype) == 'undefined') return;
+            discord.sendMSGID(stalkingPosterChannelID, `${UserName} \`stopped\` ${userStatus[UserName].activitytype} => **${userStatus[UserName].activityname}**`);
+            log.info(i18n.__("stalking_stop", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
+            userStatus[UserName] = {};
         }
     });
 };
