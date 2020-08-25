@@ -11,7 +11,7 @@ const crons = require('./crons.js');
 const AI_function = require('./AI.js');
 const stalking_function = require('./stalking.js');
 const config = require('../config/config.json'); //file with config
-const { prefix, token, activityType, activityName, AI, stalking } = require('../config/config.json');
+const { prefix, token, activityType, activityName, AI, stalking, testing_mode } = require('../config/config.json');
 const animes = require('../data/anime.json');
 
 const baseAppPATH = process.cwd();
@@ -99,19 +99,14 @@ client.on('shardError', err => {
     setTimeout(() => { basic.resetNodemon(); }, 10000);
 });
 
-process.on('unhandledRejection', err => {
-    log.error("-----unhandledRejection-----");
-    log.error(i18n.__("error", JSON.stringify(err)));
-    log.error("----------");
-    setTimeout(() => { basic.resetNodemon(); }, 10000);
-});
-
-process.on('UnhandledPromiseRejectionWarning', err => {
-    log.error("-----UnhandledPromiseRejectionWarning-----");
-    log.error(i18n.__("error", JSON.stringify(err)));
-    log.error("----------");
-    setTimeout(() => { basic.resetNodemon(); }, 10000);
-});
+if (!testing_mode) {
+    process.on('unhandledRejection', err => {
+        log.error("-----unhandledRejection-----");
+        log.error(i18n.__("error", JSON.stringify(err)));
+        log.error("----------");
+        setTimeout(() => { basic.resetNodemon(); }, 10000);
+    });
+}
 
 client.login(token);
 global.client = client; //usage outside of the box

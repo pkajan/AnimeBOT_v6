@@ -17,5 +17,6 @@
     "AI_percentChance_img": 30,
     "nameSlice": 0,
     "stalking": false,
-    "stalkingPosterChannelID": "1234567890"
+    "stalkingPosterChannelID": "1234567890",
+    "testing_mode": false
 }
