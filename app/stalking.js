@@ -27,7 +27,7 @@ module.exports.StalkingStart = function (oldPresence, newPresence) {
                 log.info(i18n.__("stalking_start", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
             });
         } else {
-            if (typeof (userStatus[UserName].activitytype) == 'undefined') return;
+            if (typeof (userStatus[UserName]) == 'undefined') return;
             discord.sendMSGID(stalkingPosterChannelID, `${UserName} \`stopped\` ${userStatus[UserName].activitytype} => **${userStatus[UserName].activityname}**`);
             log.info(i18n.__("stalking_stop", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
             userStatus[UserName] = {};
