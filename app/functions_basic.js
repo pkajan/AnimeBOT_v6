@@ -127,6 +127,7 @@ module.exports.announceFill = function (animes, realPath) {
 module.exports.checker = function (name, link, ep, picture) {
     const knownErr = [
         `<h1 class="entry-title">404</h1>`, //gogoanime
+        `<p style="font: 700 22px sans-serif;">404 - PAGE NOT FOUND</p>`, //manganelo
         `somethingSomethingDarkSide`, //another web
         `somethingSomethinglightSide` //another web
     ];
