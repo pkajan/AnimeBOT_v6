@@ -43,7 +43,7 @@
 	"enabledAI": "AI ENABLED (in config)",
 	"disabledAI": "AI DISABLED (in config)",
 	"enabledStalking": "STALKING ENABLED (in config)",
-	"disabledStalking": "STALKING ENABLED (in config)",
+	"disabledStalking": "STALKING DISABLED (in config)",
 	"AI_reply_greetings": "AI greeted %s (regEx: `%s` ¦ string: `%s`)",
 	"AI_reply_goodnights": "AI good night %s (regEx: `%s` ¦ string: `%s`)",
 	"AI_reply_goodbyes": "AI goodbye %s (regEx: `%s` ¦ string: `%s`)",
