@@ -22,7 +22,7 @@ function rngPost(message, respname = "") {
         log.info(i18n.__("AI_Autoreply_img" + respname, message.author.username.toString()));
     } else if (msgPost) {
         //post message
-        discord.replyMSG(message, basic.parse(basic.pickRandom(global.txtResponses), message.author.username.toString()));
+        discord.replyMSG(message, basic.parse(basic.pickRandom(global.txtResponses), message.member.displayName.toString()));
         log.info(i18n.__("AI_Autoreply_msg" + respname, message.author.username.toString()));
     }
 }
