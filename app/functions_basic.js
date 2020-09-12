@@ -125,6 +125,7 @@ module.exports.announceFill = function (animes, realPath) {
 
 // check if given link exist on internet
 module.exports.checker = function (name, link, ep, picture) {
+    var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0";
     const knownErr = [
         `<h1 class="entry-title">404</h1>`, //gogoanime
         `<p style="font: 700 22px sans-serif;">404 - PAGE NOT FOUND</p>`, //manganelo
@@ -134,11 +135,11 @@ module.exports.checker = function (name, link, ep, picture) {
     const exist = { "pass": true, 'name': name, 'link': link, 'ep': ep, "picture": picture };
     const notexist = { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
     async function asyncCall() {
-        var code = await fetch(link)
+        var code = await fetch(link, { "headers": { "user-agent": userAgent } })
             .then(res => res.status)
             .catch(err => log.error(`${name}, ${err.code}, ${link}`));
         if (typeof code == 'undefined') return notexist; // if page doesnt exist dont waste time trying to get html...
-        var html = await fetch(link)
+        var html = await fetch(link, { "headers": { "user-agent": userAgent } })
             .then(res => res.text())
             .then(body => body)
             .catch(err => log.error(`${name}, ${err.code}, ${link}`));
