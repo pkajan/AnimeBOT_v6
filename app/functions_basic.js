@@ -126,12 +126,7 @@ module.exports.announceFill = function (animes, realPath) {
 // check if given link exist on internet
 module.exports.checker = function (name, link, ep, picture) {
     var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0";
-    const knownErr = [
-        `<h1 class="entry-title">404</h1>`, //gogoanime
-        `<p style="font: 700 22px sans-serif;">404 - PAGE NOT FOUND</p>`, //manganelo
-        `somethingSomethingDarkSide`, //another web
-        `somethingSomethinglightSide` //another web
-    ];
+    const knownErr = require('../data/knownErr.json');
     const exist = { "pass": true, 'name': name, 'link': link, 'ep': ep, "picture": picture };
     const notexist = { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
     async function asyncCall() {
@@ -145,9 +140,14 @@ module.exports.checker = function (name, link, ep, picture) {
             .catch(err => log.error(`${name}, ${err.code}, ${link}`));
 
         if (!(code >= 200 & code <= 300)) return notexist;
-        if (knownErr.some(r => html.includes(r))) {
-            return notexist;
-        }
+        var knowns = null;
+        Object.keys(knownErr).forEach(function (k) {
+            if (html.includes(knownErr[k])) { //known err filter (not all pages return err code to determine page doesnt exist)
+                knowns = true;
+            }
+        });
+        if (knowns) return notexist;
+
         if (code >= 200 & code <= 300) {
             return exist;
         }

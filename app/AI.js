@@ -53,7 +53,7 @@ module.exports.AIStart = function (message) {
         var regx = new RegExp(`${val}`);
         if (regx.test(msg_part)) {
             switch (true) {
-                case (now >= 0 && now <= 9): //morning
+                case (now >= 0 && now <= 8): //morning
                     discord.replyMSG(message, basic.pickRandom(replies.greetings_morning));
                     break;
                 case (now > 18 && now <= 23): //evening
