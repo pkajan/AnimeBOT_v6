@@ -41,6 +41,6 @@
       "node_modules/*"
     ],
     "ext": "js json reset",
-    "delay": "5000"
+    "delay": "10000"
   }
 }
