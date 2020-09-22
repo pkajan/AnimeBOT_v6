@@ -97,7 +97,7 @@ module.exports.delEmpty = function (arr) {
 
 // restart sponsored by NODEMON
 module.exports.resetNodemon = function () {
-    console.log(baseAppPATH + "\\data\\_.RESET");
+    log.info("Restart...");
     fs.writeFile(baseAppPATH + "\\data\\_.RESET", '', function (err) {
         if (err) return log.error(err);
     });
