@@ -6,6 +6,7 @@ const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);
 const calc = require('../app/functions_calculators.js');
+const { testing_mode } = require('../config/config.json');
 
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
@@ -136,7 +137,12 @@ module.exports.checker = function (name, link, ep, picture) {
         if (typeof code == 'undefined') return notexist; // if page doesnt exist dont waste time trying to get html...
         var html = await fetch(link, { "headers": { "user-agent": userAgent } })
             .then(res => res.text())
-            .then(body => body)
+            .then(body => {
+                if (testing_mode) {
+                    log.info("HTML: " + body);
+                };
+                return body;
+            })
             .catch(err => log.error(`${name}, ${err.code}, ${link}`));
 
         if (!(code >= 200 & code <= 300)) return notexist;
