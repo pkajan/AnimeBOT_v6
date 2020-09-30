@@ -27,27 +27,23 @@ module.exports = {
 
 			//sorting
 			switch (true) {
-				case (ended || dayDiff < 0): //anime ended, do nothing
-					//code
+				case (ended): //anime ended, do nothing
+					break;
+				case (dayDiff < 0): //anime ended, do nothing
 					break;
 				case (dayDiff == 0): //today
-					//code
 					OrderedList.today[name] = tmpDATA
 					break;
 				case (dayDiff == 1): //tomorrow
-					//code
 					OrderedList.tomorrow[name] = tmpDATA;
 					break;
 				case (dayDiff == 2): //twoDays
-					//code
 					OrderedList.twoDays[name] = tmpDATA;
 					break;
 				case (dayDiff > 2 && dayDiff <= 7): //three_to_sevenDays
-					//code
 					OrderedList.three_to_sevenDays[name] = tmpDATA;
 					break;
 				default: //later
-					//code
 					OrderedList.later[name] = tmpDATA;
 			}
 		}
