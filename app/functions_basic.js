@@ -24,7 +24,7 @@ module.exports.download = function (url, destination) {
         .then(res => {
             const dest = fs.createWriteStream(destination);
             res.body.pipe(dest)
-        });
+        }).catch(error => log.error(error));
 };
 
 //read JSON and return results as object

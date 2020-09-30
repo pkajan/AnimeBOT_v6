@@ -14,7 +14,7 @@ module.exports.StalkingStart = function (oldPresence, newPresence) {
         var tmp = (oldPresence) ? oldPresence.userID : newPresence.userID; // use user ID from OLD if possible
         return client.users.fetch(tmp).then(user => {
             return user;
-        });
+        }).catch(error => log.error(error));
     }
     getName().then(user => {
         if (user.bot) return; //ignore bots
@@ -33,5 +33,5 @@ module.exports.StalkingStart = function (oldPresence, newPresence) {
             log.info(i18n.__("stalking_stop", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
             userStatus[UserName] = {};
         }
-    });
+    }).catch(error => log.error(error));
 };

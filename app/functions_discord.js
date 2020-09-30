@@ -27,10 +27,10 @@ module.exports.removeCallMSG = function (message) {
 module.exports.selfDestructReply = function (message, reply_text, additional = null, time) {
     message.channel.send(reply_text, additional).then(sentMessage => {
         sentMessage.delete({ timeout: time, reason: 'It had to be done.' }).catch(error => log.error(error));
-    });
+    }).catch(error => log.error(error));
 };
 
 //description: 'Send PM'
 module.exports.sendPM = function (message, reply_text, additional = null) {
-    message.author.send(reply_text,additional).catch(error => log.error(error));
+    message.author.send(reply_text, additional).catch(error => log.error(error));
 };

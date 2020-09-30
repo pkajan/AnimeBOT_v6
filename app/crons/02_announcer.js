@@ -3,8 +3,7 @@ var announce = require('../../announce.json');
 const basic = require('../functions_basic.js');
 const discord = require('../functions_discord.js');
 const { announceIDs } = require('../../config/config.json');
-var path = require('path');
-const { resolve } = require('path');
+const path = require('path');
 const cronSettings = `*/20 * * * *`;
 var scriptName = path.basename(__filename).substring(0, path.basename(__filename).lastIndexOf('.js'));
 
