@@ -186,3 +186,8 @@ module.exports.filesInFolder = function (directory, remove = null) {
     });
     return returningArray;
 };
+
+// return array with only uniq values (remove duplicates)
+module.exports.removeDuplicates = function (array) {
+    return Array.from(new Set(array));
+};

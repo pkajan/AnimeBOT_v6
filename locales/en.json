@@ -56,5 +56,7 @@
 	"InternetUP": "Internet UP, restarting.",
 	"InternetDown": "Internet DOWN, waiting...",
 	"stalking_start": "%s started %s => %s",
-	"stalking_stop": "%s stopped %s => %s"
+	"stalking_stop": "%s stopped %s => %s",
+	"cmd_help_msg": "Available commands: \n%s",
+	"cmd_help_msg_log": "Help requested by [%s]"
 }

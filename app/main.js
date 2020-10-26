@@ -33,6 +33,17 @@ for (const file of commandFiles) {
         client.commands.set(element, command); // add alternative command names
     });
 }
+
+/* put all commands into array */
+var commandList = [];
+client.commands.forEach(element => {
+    if (!commandList[element.name]) {
+        commandList[element.name] = element.altnames;
+    } else {
+        commandList[element.name] = basic.removeDuplicates((commandList[element.name] + ";" + element.altnames).split(";")).join(";");
+    }
+});
+
 /* ON READY/start */
 client.once('ready', () => {
     log.info(i18n.__("ready", client.user.username));
@@ -53,7 +64,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     if (basic.isEmpty(command)) return; // empty command
 
-    var data = { "message": message, "client": client, "config": config, "prefix": prefix, "baseAppPATH": baseAppPATH };
+    var data = { "message": message, "client": client, "config": config, "prefix": prefix, "baseAppPATH": baseAppPATH, "commandList": commandList };
 
     //commands executions
     if (client.commands.has(command)) {

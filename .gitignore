@@ -17,3 +17,4 @@ locales/custom.json
 data/AI.json
 data/responses.txt
 .vscode/
+.dccache
