@@ -10,7 +10,6 @@ const basic = require('./functions_basic');
 const crons = require('./crons.js');
 const AI_function = require('./AI.js');
 const stalking_function = require('./stalking.js');
-const config = require('../config/config.json'); //file with config
 const { prefix, token, activityType, activityName, AI, stalking, testing_mode } = require('../config/config.json');
 const animes = require('../data/anime.json');
 
@@ -64,7 +63,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     if (basic.isEmpty(command)) return; // empty command
 
-    var data = { "message": message, "client": client, "config": config, "prefix": prefix, "baseAppPATH": baseAppPATH, "commandList": commandList };
+    var data = { "message": message, "client": client, "config": require('../config/config.json'), "prefix": prefix, "baseAppPATH": baseAppPATH, "commandList": commandList };
 
     //commands executions
     if (client.commands.has(command)) {

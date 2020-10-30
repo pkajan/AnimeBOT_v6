@@ -14,7 +14,8 @@ module.exports = {
 		var realPath = tmpPath.substring(0, tmpPath.lastIndexOf('\\'));
 		delete require.cache[require.resolve('../../announce.json')]   // Deleting loaded module
 		announce = require('../../announce.json');
-		for (var i in announce) {
+		for (var j = 0; j < Object.keys(announce).length; j++) {
+			var i = Object.keys(announce)[j];
 			var entry = announce[i];
 			async function asyncCall() {
 				var result = await basic.checker(entry.name, entry.link, entry.ep, entry.picture);

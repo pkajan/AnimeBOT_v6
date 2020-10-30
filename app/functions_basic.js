@@ -87,8 +87,11 @@ module.exports.readSYNC = function (filepath) {
 
 //test if json object is empty
 module.exports.isEmpty = function (jsonObj) {
-    for (var i in jsonObj) return false;
-    return true;
+    var value = true;
+    for (var j = 0; j < Object.keys(jsonObj).length; j++) {
+        value = false;
+    }
+    return value;
 };
 
 // remove empty("" / '') and null from array
@@ -106,7 +109,8 @@ module.exports.resetNodemon = function () {
 
 // announce filler
 module.exports.announceFill = function (animes, realPath) {
-    for (var i in animes) {
+    for (var j = 0; j < Object.keys(animes).length; j++) {
+        var i = Object.keys(animes)[j];
         var entryDate = date.parse(`${animes[`${i}`].year}-${calc.fixDubleDigits(animes[`${i}`].month)}-${calc.fixDubleDigits(animes[`${i}`].day)}`, 'YYYY-MM-DD');
         var newData = calc.NewRelease(entryDate, 7, parseInt(animes[`${i}`]._starting_episode) - parseInt(animes[`${i}`]._skipped_episodes), animes[`${i}`]._last_episode);
         var name = i;

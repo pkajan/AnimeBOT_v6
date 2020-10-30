@@ -8,7 +8,7 @@ module.exports = {
 	altnames: i18n.__({ phrase: "__alt_cmd__status", locale: "custom" }),
 	description: 'change status',
 	execute(data, args) {
-		var types = Array("WATCHING", "PLAYING", "LISTENING");
+		var types = ['WATCHING', 'PLAYING', 'LISTENING'];
 		var status_type = (args[0] || "").toUpperCase();
 
 		if (types.includes(status_type)) {

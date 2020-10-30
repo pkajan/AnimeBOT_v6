@@ -23,6 +23,7 @@
 	"NotURL_msg": "This '%s' is not a valid URL.",
 	"FileNotFound": "File not found! [<%s>]",
 	"cmd_onlinelist_msg_log": "List posted in channel [invoked by %s]",
+	"cmd_onlinelist_msg_EMPTY": "Nothing to announce.",
 	"cmd_onlinelistdownload_log": "List downloaded. [invoked by %s]",
 	"today": "Today",
 	"tomorrow": "Tomorrow",

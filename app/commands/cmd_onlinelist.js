@@ -14,7 +14,8 @@ module.exports = {
 	altnames: i18n.__({ phrase: "__alt_cmd__onlinelist", locale: "custom" }),
 	description: 'manualy initiate anime list update',
 	execute(data, args) {
-		for (var i in animes) {
+		for (var j = 0; j < Object.keys(animes).length; j++) {
+			var i = Object.keys(animes)[j];
 			var entryDate = date.parse(`${animes[`${i}`].year}-${calc.fixDubleDigits(animes[`${i}`].month)}-${calc.fixDubleDigits(animes[`${i}`].day)}`, 'YYYY-MM-DD');
 			var newData = calc.NewRelease(entryDate, 7, parseInt(animes[`${i}`]._starting_episode) - parseInt(animes[`${i}`]._skipped_episodes), animes[`${i}`]._last_episode);
 			var name = i;
@@ -57,7 +58,8 @@ module.exports = {
 			if (!basic.isEmpty(part)) {
 				ListMessage += "```fix\n" + titles[0] + ":```\n";
 				titles.shift();
-				for (var entry in part) {
+				for (var j = 0; j < Object.keys(part).length; j++) {
+					var entry = Object.keys(part)[j];
 					var obj = part[entry];
 					ListMessage += EntryString(obj);
 				}
@@ -69,11 +71,15 @@ module.exports = {
 
 		if (!basic.isEmpty(OrderedList.later) && data.config.show_more_than_week) {
 			ListMessage += "```fix\n" + i18n.__("later") + ":```\n";
-			for (var entry in OrderedList.later) {
+			for (var j = 0; j < Object.keys(OrderedList.later).length; j++) {
+				var entry = Object.keys(OrderedList.later)[j];
 				var obj = OrderedList.later[entry];
 				ListMessage += EntryString(obj);
 			}
 			ListMessage += "\n";
+		}
+		if (ListMessage == "") {
+			ListMessage = i18n.__("cmd_onlinelist_msg_EMPTY");
 		}
 		discord.selfDestructReply(data.message, ListMessage, null, 15000);
 		log.info(i18n.__("cmd_onlinelist_msg_log", data.message.author.username.toString()));
