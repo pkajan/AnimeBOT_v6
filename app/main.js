@@ -14,7 +14,15 @@ const { prefix, token, activityType, activityName, AI, stalking, testing_mode } 
 const animes = require('../data/anime.json');
 
 const baseAppPATH = process.cwd();
-basic.announceFill(animes, baseAppPATH + '//announce.json'); // fill announce file
+const announcePath = baseAppPATH + '//announce.json';
+try {
+    if (!fs.existsSync(announcePath)) {
+        basic.fwSYNC(announcePath, "{}\n", "A");
+    }
+} catch (err) {
+    log.info(err);
+}
+basic.announceFill(animes, announcePath); // fill announce file
 basic.fwSYNC(baseAppPATH + '//announceFIN.txt', "", "A");
 basic.fwSYNC(baseAppPATH + '//data//responses.txt', "", "A");
 

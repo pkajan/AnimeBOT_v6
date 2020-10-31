@@ -1,6 +1,5 @@
 const log = require('../logger.js');
 const discord = require('../functions_discord');
-var announce = require('../../announce.json');
 const basic = require('../functions_basic.js');
 const { announceIDs } = require('../../config/config.json');
 
