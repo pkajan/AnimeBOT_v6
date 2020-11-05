@@ -19,12 +19,29 @@ module.exports.parse = function (str, arg) {
 };
 
 //Download url content
-module.exports.download = function (url, destination) {
-    fetch(url)
-        .then(res => {
-            const dest = fs.createWriteStream(destination);
-            res.body.pipe(dest)
-        }).catch(error => log.error(error));
+module.exports.download = function (url, destination, json = false) {
+    if (json == true) {
+        fetch(url)
+            .then(res => res.text())
+            .then(body => {
+                if (this.isJson(body) == true) {
+                    fetch(url)
+                        .then(res => {
+                            const dest = fs.createWriteStream(destination);
+                            res.body.pipe(dest)
+                        }).catch(error => log.error(error));
+                } else {
+                    log.error(i18n.__("download_not_a_json", url));
+                }
+            }).catch(error => log.error(error));;
+    } else {
+        fetch(url)
+            .then(res => {
+                const dest = fs.createWriteStream(destination);
+                res.body.pipe(dest)
+            }).catch(error => log.error(error));
+    }
+
 };
 
 //read JSON and return results as object
@@ -194,4 +211,14 @@ module.exports.filesInFolder = function (directory, remove = null) {
 // return array with only uniq values (remove duplicates)
 module.exports.removeDuplicates = function (array) {
     return Array.from(new Set(array));
+};
+
+// return if given string is Json or not
+module.exports.isJson = function (string) {
+    try {
+        JSON.parse(string);
+    } catch (e) {
+        return false;
+    }
+    return true;
 };

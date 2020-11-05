@@ -10,7 +10,7 @@ const CronJob = require('cron').CronJob;
 function task() {
     const job = new CronJob(cronSettings, function () {
         if (onlineList.download == true) {
-            basic.download(onlineList.url, baseAppPATH + "/data/anime.json");
+            basic.download(onlineList.url, baseAppPATH + "/data/anime.json", true);
             log.info(i18n.__("cron_3_success"));
         }
     });

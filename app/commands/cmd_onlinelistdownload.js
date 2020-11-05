@@ -7,6 +7,6 @@ module.exports = {
 	description: 'Redownload online list (json) if set in config.',
 	execute(data, args) {
 		log.info(i18n.__("cmd_onlinelistdownload_log", data.message.author.username.toString()));
-		basic.download(data.config.onlineList.url, data.baseAppPATH + "/data/anime.json");
+		basic.download(data.config.onlineList.url, data.baseAppPATH + "/data/anime.json", true);
 	},
 };
