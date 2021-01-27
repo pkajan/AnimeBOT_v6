@@ -1,5 +1,6 @@
 const log = require('../logger.js');
 const discord = require('../functions_discord');
+const { selfDestructTime } = require('../../config/config.json');
 
 module.exports = {
 	name: 'help',
@@ -12,7 +13,7 @@ module.exports = {
 			outputString += `\`${value}\` : ${data.commandList[value]}\n`;
 		});
 
-		discord.selfDestructReply(data.message, i18n.__("cmd_help_msg", outputString.replace(/__alt_cmd__/g, "").replace(/;/g, ", ")), null, 15000);
+		discord.selfDestructReply(data.message, i18n.__("cmd_help_msg", outputString.replace(/__alt_cmd__/g, "").replace(/;/g, ", ")), null, selfDestructTime);
 		log.info(i18n.__("cmd_help_msg_log", data.message.author.username.toString()));
 	},
 };

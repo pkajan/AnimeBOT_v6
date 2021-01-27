@@ -6,6 +6,7 @@ const animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');
 const discord = require('../functions_discord');
 const calc = require('../functions_calculators.js');
+const { selfDestructTime } = require('../../config/config.json');
 
 var OrderedList = { "today": {}, "tomorrow": {}, "twoDays": {}, "three_to_sevenDays": {}, "later": {} };
 
@@ -81,7 +82,7 @@ module.exports = {
 		if (ListMessage == "") {
 			ListMessage = i18n.__("cmd_onlinelist_msg_EMPTY");
 		}
-		discord.selfDestructReply(data.message, ListMessage, null, 15000);
+		discord.selfDestructReply(data.message, ListMessage, null, selfDestructTime);
 		log.info(i18n.__("cmd_onlinelist_msg_log", data.message.author.username.toString()));
 	},
 };

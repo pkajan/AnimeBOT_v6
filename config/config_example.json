@@ -15,6 +15,7 @@
     "AI": false,
     "AI_percentChance": 20,
     "AI_percentChance_img": 30,
+    "selfDestructTime": 20000,
     "nameSlice": 0,
     "stalking": false,
     "stalkingPosterChannelID": "1234567890",
