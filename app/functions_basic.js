@@ -224,6 +224,6 @@ module.exports.isJson = function (string) {
 };
 
 module.exports.ninegagCorrector = function (string) {
-    const regex = /https:\/\/comment.*#/gm;
+    const regex = /https:\/\/comment.*9gag.*#/gm;
     return string.replace(regex, '');
 };

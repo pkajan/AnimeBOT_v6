@@ -86,7 +86,7 @@ client.on('message', message => {
 if (a9gagCorrector) { /* ON MESSAGE 9gag branch */
     client.on('message', message => {
         if (message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots and pre commands
-        const regex = /https:\/\/comment.*#/gm;
+        const regex = /https:\/\/comment.*9gag.*#/gm;
         if (regex.test(message.content)) {
             discordfc.replyMSG(message, basic.ninegagCorrector(message.content));
             discordfc.removeCallMSG(message);
