@@ -10,7 +10,7 @@ const basic = require('./functions_basic');
 const crons = require('./crons.js');
 const AI_function = require('./AI.js');
 const stalking_function = require('./stalking.js');
-const { prefix, token, activityType, activityName, AI, stalking, testing_mode } = require('../config/config.json');
+const { prefix, token, activityType, activityName, AI, stalking, a9gagCorrector, testing_mode } = require('../config/config.json');
 const animes = require('../data/anime.json');
 
 const baseAppPATH = process.cwd();
@@ -82,6 +82,18 @@ client.on('message', message => {
         log.info(i18n.__("commandNaN", command));
     }
 });
+
+if (a9gagCorrector) { /* ON MESSAGE 9gag branch */
+    client.on('message', message => {
+        if (message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots and pre commands
+        const regex = /https:\/\/comment.*#/gm;
+        if (regex.test(message.content)) {
+            discordfc.replyMSG(message, basic.ninegagCorrector(message.content));
+            discordfc.removeCallMSG(message);
+            log.info(i18n.__("a9gag", message.author.username.toString()));
+        }
+    });
+}
 
 if (AI) { /* ON MESSAGE AI branch */
     client.on('message', message => {
