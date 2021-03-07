@@ -9,5 +9,7 @@
 	"__alt_cmd__update": "__alt_cmd__update",
 	"__alt_cmd__forcecheck": "__alt_cmd__forcecheck",
 	"__alt_cmd__log":"__alt_cmd__log",
-	"__alt_cmd__onlinelistdownload": "__alt_cmd__onlinelistdownload"
+	"__alt_cmd__onlinelistdownload": "__alt_cmd__onlinelistdownload",
+	"__alt_cmd__help": "__alt_cmd__help",
+	"__alt_cmd__lastupd": "__alt_cmd__lastupd"
 }
