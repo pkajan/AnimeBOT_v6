@@ -61,5 +61,6 @@
 	"cmd_help_msg": "Available commands: \n%s",
 	"cmd_help_msg_log": "Help requested by [%s]",
 	"download_not_a_json": "Pointed file is not a Json ( %s ).",
-	"a9gag": "Corrected 9gag comment image [%s]"
+	"a9gag": "Corrected 9gag comment image [%s]",
+	"cmd_lastupd_log": "Last updates info."
 }
