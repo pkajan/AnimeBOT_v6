@@ -147,7 +147,7 @@ module.exports.announceFill = function (animes, realPath) {
 
 // check if given link exist on internet
 module.exports.checker = function (name, link, ep, picture) {
-    var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0";
+    var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0";
     const knownErr = require('../data/knownErr.json');
     const exist = { "pass": true, 'name': name, 'link': link, 'ep': ep, "picture": picture };
     const notexist = { "pass": false, 'name': name, 'link': link, 'ep': ep, "picture": picture };
