@@ -7,8 +7,8 @@
     "cron": "^1.8.2",
     "date-and-time": "^1.0.0",
     "discord.js": "^12.5.3",
-    "fs-extra": "^9.1.0",
-    "i18n": "^0.13.2",
+    "fs-extra": "^10.0.0",
+    "i18n": "^0.13.3",
     "node-fetch": "^2.6.1",
     "retus": "^1.1.2",
     "simple-node-logger": "^18.12.24"
