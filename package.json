@@ -13,7 +13,9 @@
     "retus": "^1.1.2",
     "simple-node-logger": "^18.12.24"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.29.0"
+  },
   "scripts": {
     "preinstall": "npm i -g nodemon && npm i -g npm-check-updates",
     "start": "node index.js"

@@ -1,3 +1,4 @@
+/*global i18n*/
 const log = require('../logger.js');
 var animes = require('../../data/anime.json');
 const basic = require('../functions_basic.js');

@@ -1,3 +1,4 @@
+/*global i18n*/
 const log = require('../logger.js');
 const basic = require('../functions_basic.js');
 const { onlineList } = require('../../config/config.json');

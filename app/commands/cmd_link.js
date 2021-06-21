@@ -1,3 +1,4 @@
+/*global i18n*/
 const log = require('../logger.js');
 const fetch = require('node-fetch');
 const discord = require('../functions_discord');

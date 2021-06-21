@@ -4,6 +4,7 @@
 	"cmd_say_empty_log": "Say msg was EMPTY",
 	"cmd_say_msg": "User: **%s** forced me to say **%s**",
 	"ready": "BOT Ready! [%s]",
+	"prefix": "BOT Prefix: %s",
 	"commandPASS": "CommandPASS: **%s**",
 	"commandNaN": "NON-existent command: **%s**",
 	"cmd_google_msg_log": "User: **%s** googled **%s**",

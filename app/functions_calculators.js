@@ -1,4 +1,3 @@
-const log = require('./logger.js');
 const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);

@@ -1,3 +1,4 @@
+/*global i18n*/
 const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);
@@ -14,7 +15,7 @@ module.exports = {
 	name: 'onlinelist',
 	altnames: i18n.__({ phrase: "__alt_cmd__onlinelist", locale: "custom" }),
 	description: 'manualy initiate anime list update',
-	execute(data, args) {
+	execute(data) {
 		for (var j = 0; j < Object.keys(animes).length; j++) {
 			var i = Object.keys(animes)[j];
 			var entryDate = date.parse(`${animes[`${i}`].year}-${calc.fixDubleDigits(animes[`${i}`].month)}-${calc.fixDubleDigits(animes[`${i}`].day)}`, 'YYYY-MM-DD');
@@ -51,7 +52,7 @@ module.exports = {
 		}
 
 		var ListMessage = "";
-		EntryString = (obj) => { return `**${obj.name}**: ${date.format(obj.newDate, 'dddd, DDD MMMM')} [\`ep${obj.ep}\`]\n`; };
+		var EntryString = (obj) => { return `**${obj.name}**: ${date.format(obj.newDate, 'dddd, DDD MMMM')} [\`ep${obj.ep}\`]\n`; };
 
 		var combined = [OrderedList.today, OrderedList.tomorrow, OrderedList.twoDays, OrderedList.three_to_sevenDays];
 		var titles = [i18n.__("today"), i18n.__("tomorrow"), i18n.__("two_days"), i18n.__("less_than_week")];
@@ -72,8 +73,8 @@ module.exports = {
 
 		if (!basic.isEmpty(OrderedList.later) && data.config.show_more_than_week) {
 			ListMessage += "```fix\n" + i18n.__("later") + ":```\n";
-			for (var j = 0; j < Object.keys(OrderedList.later).length; j++) {
-				var entry = Object.keys(OrderedList.later)[j];
+			for (var k = 0; k < Object.keys(OrderedList.later).length; k++) {
+				var entry = Object.keys(OrderedList.later)[k];
 				var obj = OrderedList.later[entry];
 				ListMessage += EntryString(obj);
 			}

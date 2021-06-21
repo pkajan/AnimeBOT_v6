@@ -1,3 +1,4 @@
+/*global i18n*/
 const log = require('../logger.js');
 const discord = require('../functions_discord');
 
@@ -6,7 +7,7 @@ module.exports = {
 	altnames: i18n.__({ phrase: "__alt_cmd__lastupd", locale: "custom" }),
 	description: 'Show 5 latest commits',
 
-	execute(data, args) {
+	execute(data) {
 		require('child_process').exec('git status -u no', function (err, stdout) { //chceck if your branch is ahead of you
 			var gitInfo = "";
 			var regex = new RegExp('branch is behind*');

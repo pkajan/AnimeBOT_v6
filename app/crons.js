@@ -1,3 +1,4 @@
+/*global i18n*/
 const fs = require('fs-extra');
 const log = require('./logger.js');
 const { cron } = require('../config/config.json');

@@ -1,7 +1,6 @@
-const fs = require('fs-extra');
+/*global i18n*/
 const log = require('./logger.js');
 const discord = require('../app/functions_discord.js');
-const basic = require('../app/functions_basic.js');
 const { stalkingPosterChannelID } = require('../config/config.json');
 const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');

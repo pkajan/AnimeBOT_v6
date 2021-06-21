@@ -1,4 +1,3 @@
-const basic = require('./functions_basic.js');
 const log = require('./logger.js');
 
 //description: 'Send message to channel with given ID'

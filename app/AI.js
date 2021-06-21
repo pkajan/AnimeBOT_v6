@@ -1,9 +1,10 @@
-const fs = require('fs-extra');
+/*global i18n*/
 const log = require('./logger.js');
 const discord = require('../app/functions_discord.js');
 const basic = require('../app/functions_basic.js');
 const { invoke, replies, exceptions } = require('../data/AI.json');
-const { AI_percentChance, AI_percentChance_img, nameSlice } = require('../config/config.json');
+const { AI_percentChance, nameSlice } = require('../config/config.json');
+var { AI_percentChance_img } = require('../config/config.json');
 const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);

@@ -1,3 +1,4 @@
+/*global i18n*/
 const log = require('../logger.js');
 
 module.exports = {

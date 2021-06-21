@@ -1,7 +1,8 @@
+/*global i18n*/
 const fs = require('fs-extra');
 const fetch = require('node-fetch');
 const log = require('./logger.js');
-const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));;
+const baseAppPATH = __dirname.substring(0, __dirname.lastIndexOf('\\'));
 const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);
@@ -33,7 +34,7 @@ module.exports.download = function (url, destination, json = false) {
                 } else {
                     log.error(i18n.__("download_not_a_json", url));
                 }
-            }).catch(error => log.error(error));;
+            }).catch(error => log.error(error));
     } else {
         fetch(url)
             .then(res => {
@@ -161,7 +162,7 @@ module.exports.checker = function (name, link, ep, picture) {
             .then(body => {
                 if (testing_mode) {
                     log.info("HTML: " + body);
-                };
+                }
                 return body;
             })
             .catch(err => log.error(`${name}, ${err.code}, ${link}`));
@@ -199,7 +200,7 @@ module.exports.percentChance = function (percent) {
 };
 
 // return all files from given folder as array
-module.exports.filesInFolder = function (directory, remove = null) {
+module.exports.filesInFolder = function (directory) {
     var tmp = fs.readdirSync(directory).filter(arrayItem => arrayItem !== "info.txt");
     var returningArray = [];
     tmp.forEach(value => {
