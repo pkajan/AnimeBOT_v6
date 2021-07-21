@@ -13,6 +13,7 @@ const AI_function = require('./AI.js');
 const stalking_function = require('./stalking.js');
 const { prefix, token, activityType, activityName, AI, stalking, a9gagCorrector, testing_mode } = require('../config/config.json');
 const animes = require('../data/anime.json');
+const path = require('path');
 
 const baseAppPATH = process.cwd();
 const announcePath = baseAppPATH + '//announce.json';
@@ -110,7 +111,7 @@ if (AI) { /* ON MESSAGE AI branch */
 
 if (stalking) { /* stalking users */
     client.on('presenceUpdate', (oldPresence, newPresence) => {
-        stalking_function.StalkingStart(oldPresence, newPresence);
+        stalking_function.StalkingStart(oldPresence, newPresence, client);
     });
     log.info(i18n.__("enabledStalking"));
 } else {
@@ -143,5 +144,5 @@ if (!testing_mode) {
 
 client.login(token);
 global.client = client; //usage outside of the box
-global.images = basic.filesInFolder(baseAppPATH + "\\images");
-global.txtResponses = basic.delEmpty(basic.readSYNC(baseAppPATH + '\\data\\responses.txt').split("\n"));
+global.images = basic.filesInFolder(path.normalize(path.join(baseAppPATH, "images")));
+global.txtResponses = basic.delEmpty(basic.readSYNC(path.normalize(path.join(baseAppPATH, 'data/responses.txt'))).split("\n"));

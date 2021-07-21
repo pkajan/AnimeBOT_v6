@@ -201,10 +201,11 @@ module.exports.percentChance = function (percent) {
 
 // return all files from given folder as array
 module.exports.filesInFolder = function (directory) {
+    const path = require('path');
     var tmp = fs.readdirSync(directory).filter(arrayItem => arrayItem !== "info.txt");
     var returningArray = [];
     tmp.forEach(value => {
-        returningArray.push(directory + "\\" + value);
+        returningArray.push(path.normalize(path.join(directory, value)));
     });
     return returningArray;
 };

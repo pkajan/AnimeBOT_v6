@@ -8,7 +8,7 @@ date.plugin(ordinal);
 var userStatus = {};
 
 //description: 'start AI tasks'
-module.exports.StalkingStart = function (oldPresence, newPresence) {
+module.exports.StalkingStart = function (oldPresence, newPresence, client) {
     async function getName() {
         var tmp = (oldPresence) ? oldPresence.userID : newPresence.userID; // use user ID from OLD if possible
         return client.users.fetch(tmp).then(user => {
