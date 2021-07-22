@@ -16,7 +16,7 @@ const animes = require('../data/anime.json');
 const path = require('path');
 
 const baseAppPATH = process.cwd();
-const announcePath = baseAppPATH + '//announce.json';
+const announcePath = path.normalize(path.join(baseAppPATH, 'announce.json'));
 try {
     if (!fs.existsSync(announcePath)) {
         basic.fwSYNC(announcePath, "{}\n", "A");
@@ -25,8 +25,8 @@ try {
     log.info(err);
 }
 basic.announceFill(animes, announcePath); // fill announce file
-basic.fwSYNC(baseAppPATH + '//announceFIN.txt', "", "A");
-basic.fwSYNC(baseAppPATH + '//data//responses.txt', "", "A");
+basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'announceFIN.txt')), "", "A");
+basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'data', 'responses.txt')), "", "A");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();

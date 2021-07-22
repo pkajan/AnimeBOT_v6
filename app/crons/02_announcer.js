@@ -14,18 +14,18 @@ async function asyncCall(entry, realPath, postMessage) {
         log.info(i18n.__("cron_2_wait", `${result.name}-ep${result.ep}`));
         return;
     }
-    if (basic.readSYNC(realPath + '//announceFIN.txt').includes(result.link)) {
-        basic.JSON_remove(realPath + '//announce.json', `${result.name}-ep${result.ep}`); //if already posted remove
+    if (basic.readSYNC(path.normalize(path.join(realPath, 'announceFIN.txt'))).includes(result.link)) {
+        basic.JSON_remove(path.normalize(path.join(realPath, 'announce.json')), `${result.name}-ep${result.ep}`); //if already posted remove
         log.info(i18n.__("cron_2_success_repeated", `${result.name}-ep${result.ep}`));
         return;
     }
     basic.delEmpty(announceIDs.split(";")).forEach(element => {
         discord.sendMSGID(element, postMessage(result), { files: [result.picture] });
-        basic.JSON_remove(realPath + '//announce.json', `${result.name}-ep${result.ep}`);
+        basic.JSON_remove(path.normalize(path.join(realPath, 'announce.json')), `${result.name}-ep${result.ep}`);
         log.info(i18n.__("cron_2_success", `${result.name}-ep${result.ep}`, element));
     });
     log.info(i18n.__("cron_2_removed", `${result.name}-ep${result.ep}`));
-    basic.fwASYNC(realPath + '//announceFIN.txt', result.link + '\n');
+    basic.fwASYNC(path.normalize(path.join(realPath, 'announceFIN.txt')), result.link + '\n');
 }
 
 const CronJob = require('cron').CronJob;

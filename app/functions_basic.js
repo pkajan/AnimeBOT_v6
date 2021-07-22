@@ -8,6 +8,7 @@ const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);
 const calc = require('../app/functions_calculators.js');
 const { testing_mode } = require('../config/config.json');
+const path = require('path');
 
 //description: 'remove accents/diacritics'
 module.exports.deunicode = function (any_string) {
@@ -120,7 +121,7 @@ module.exports.delEmpty = function (arr) {
 // restart sponsored by NODEMON
 module.exports.resetNodemon = function () {
     log.info("Restart...");
-    fs.writeFile(baseAppPATH + "\\data\\_.RESET", '', function (err) {
+    fs.writeFile(path.normalize(path.join(baseAppPATH, "data", "_.RESET")), '', function (err) {
         if (err) return log.error(err);
     });
 };
@@ -201,7 +202,6 @@ module.exports.percentChance = function (percent) {
 
 // return all files from given folder as array
 module.exports.filesInFolder = function (directory) {
-    const path = require('path');
     var tmp = fs.readdirSync(directory).filter(arrayItem => arrayItem !== "info.txt");
     var returningArray = [];
     tmp.forEach(value => {
