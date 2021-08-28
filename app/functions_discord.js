@@ -8,7 +8,9 @@ module.exports.sendMSGID = function (channelID, MSGText, stuff = null) {
 //description: 'Send and remove message in X seconds (from given channel)'
 module.exports.selfDestructMSGID = function (channelID, MSGText, stuff = null, time) {
     global.client.channels.cache.get(channelID).send({ content: MSGText, files: stuff }).then(sentMessage => {
-        sentMessage.delete({ timeout: time, reason: 'It had to be done.' });
+        setTimeout(function () {
+            sentMessage.delete().catch(error => log.error(error));
+        }, time)
     }).catch(error => log.error(error));
 };
 
@@ -20,11 +22,7 @@ module.exports.replyMSG = function (message, reply_text, stuff = null) {
 //description: 'Remove invoking message'
 module.exports.removeCallMSG = function (message) {
     setTimeout(function () {
-        try {
-            message.delete();
-        } catch (error) {
-            log.error(error);
-        }
+        message.delete().catch(error => log.error(error));
     }, 1000)
 };
 
@@ -32,11 +30,7 @@ module.exports.removeCallMSG = function (message) {
 module.exports.selfDestructReply = function (message, reply_text, stuff = null, time) {
     message.channel.send({ content: reply_text, files: stuff }).then(sentMessage => {
         setTimeout(function () {
-            try {
-                sentMessage.delete();
-            } catch (error) {
-                log.error(error);
-            }
+            sentMessage.delete().catch(error => log.error(error));
         }, time)
     }).catch(error => log.error(error));
 };

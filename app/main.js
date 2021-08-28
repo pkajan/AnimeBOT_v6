@@ -69,11 +69,7 @@ client.once('ready', () => {
     log.info(i18n.__("prefix", prefix));
 
     /* set status of the bot */
-    try {
-        client.user.setPresence({ activities: [{ type: activityType.toUpperCase(), name: activityName }] });
-    } catch (error) {
-        log.error(error);
-    }
+    client.user.setPresence({ activities: [{ type: activityType.toUpperCase(), name: activityName }] })
     log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName));
 
     /* start cron tasks */

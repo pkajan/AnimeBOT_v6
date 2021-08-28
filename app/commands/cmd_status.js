@@ -14,12 +14,7 @@ module.exports = {
         if (types.includes(status_type)) {
             args.splice(0, 1);
             var status_name = args.join(" ");
-
-            try {
-                data.client.user.setPresence({ activities: [{ type: status_type, name: status_name }] });
-            } catch (error) {
-                log.error(error);
-            }
+            data.client.user.setPresence({ activities: [{ type: status_type, name: status_name }] });
             log.info(i18n.__("cmd_status_log", data.message.author.username.toString(), status_type, status_name))
 
             //save changed status to settings
