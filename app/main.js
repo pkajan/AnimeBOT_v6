@@ -4,7 +4,7 @@ netTest.tryInternet("https://1.1.1.1"); // wait till internet is UP
 /*global i18n*/
 require('./i18n'); //load i18n settings
 const fs = require('fs-extra');
-const Discord = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 const discordfc = require('./functions_discord');
 const log = require('./logger.js');
 const basic = require('./functions_basic');
@@ -28,8 +28,18 @@ basic.announceFill(animes, announcePath); // fill announce file
 basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'announceFIN.txt')), "", "A");
 basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'data', 'responses.txt')), "", "A");
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const myIntents = new Intents();
+myIntents.add(Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_MEMBERS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    Intents.FLAGS.DIRECT_MESSAGES,
+    Intents.FLAGS.GUILDS
+);
+
+const client = new Client({ intents: myIntents });
+client.commands = new Collection();
 
 /* read files with commands and put it into array */
 const commandFiles = fs.readdirSync('./app/commands').filter(file => file.endsWith('.js'));
@@ -59,16 +69,19 @@ client.once('ready', () => {
     log.info(i18n.__("prefix", prefix));
 
     /* set status of the bot */
-    client.user.setPresence({ activity: { type: activityType.toUpperCase(), name: activityName } })
-        .then(log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName)))
-        .catch(e => log.error(e));
+    try {
+        client.user.setPresence({ activities: [{ type: activityType.toUpperCase(), name: activityName }] });
+    } catch (error) {
+        log.error(error);
+    }
+    log.info(i18n.__("set_status_log", activityType.toUpperCase(), activityName));
 
     /* start cron tasks */
     crons.cronStart();
 });
 
 /* ON MESSAGE */
-client.on('message', message => {
+client.on('messageCreate', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -88,7 +101,7 @@ client.on('message', message => {
 });
 
 if (a9gagCorrector) { /* ON MESSAGE 9gag branch */
-    client.on('message', message => {
+    client.on('messageCreate', message => {
         if (message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots and pre commands
         const regex = /https:\/\/comment.*9gag.*#/gm;
         if (regex.test(message.content)) {
@@ -100,7 +113,7 @@ if (a9gagCorrector) { /* ON MESSAGE 9gag branch */
 }
 
 if (AI) { /* ON MESSAGE AI branch */
-    client.on('message', message => {
+    client.on('messageCreate', message => {
         if (message.content.startsWith(prefix) || message.author.bot) return; //ignore messages from other bots and pre commands
         AI_function.AIStart(message);
     });

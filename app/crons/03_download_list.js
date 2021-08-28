@@ -20,4 +20,3 @@ function task() {
 
 task(); // start task
 log.info(i18n.__("cron_started", scriptName, cronSettings));
-

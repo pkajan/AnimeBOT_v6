@@ -20,7 +20,7 @@ async function asyncCall(entry, realPath, postMessage) {
         return;
     }
     basic.delEmpty(announceIDs.split(";")).forEach(element => {
-        discord.sendMSGID(element, postMessage(result), { files: [result.picture] });
+        discord.sendMSGID(element, postMessage(result), [result.picture]);
         basic.JSON_remove(path.normalize(path.join(realPath, 'announce.json')), `${result.name}-ep${result.ep}`);
         log.info(i18n.__("cron_2_success", `${result.name}-ep${result.ep}`, element));
     });
@@ -29,12 +29,13 @@ async function asyncCall(entry, realPath, postMessage) {
 }
 
 const CronJob = require('cron').CronJob;
+
 function task() {
     var postMessage = (obj) => { return `\`\`\`fix\n ${obj.name} => ep${obj.ep} \`\`\`\n<${obj.link}>\n`; };
     var tmpPath = __dirname.substring(0, __dirname.lastIndexOf('\\'));
     var realPath = tmpPath.substring(0, tmpPath.lastIndexOf('\\'));
     const job = new CronJob(cronSettings, function () {
-        delete require.cache[require.resolve('../../announce.json')]   // Deleting loaded module
+        delete require.cache[require.resolve('../../announce.json')] // Deleting loaded module
         announce = require('../../announce.json');
         for (var j = 0; j < Object.keys(announce).length; j++) {
             var i = Object.keys(announce)[j];

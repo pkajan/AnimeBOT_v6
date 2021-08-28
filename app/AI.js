@@ -14,12 +14,7 @@ function rngPost(message, respname = "") {
     if (basic.percentChance(AI_percentChance_img)) {
         //post image
         var img = basic.pickRandom(global.images);
-        discord.replyMSG(message, null, {
-            files: [{
-                attachment: img,
-                name: img.substring(img.lastIndexOf('/') + 1 | img.lastIndexOf('\\') + 1)
-            }]
-        });
+        discord.replyMSG(message, null, [img]);
         log.info(i18n.__("AI_Autoreply_img" + respname, message.author.username.toString()));
     } else if (msgPost) {
         //post message
