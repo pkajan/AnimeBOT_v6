@@ -16,6 +16,8 @@ try {
     log.info(err);
 }
 
+messageCounter = basic.JSON_read(statisticsPath);
+
 //description: 'start stalking messages'
 module.exports.StalkingMessages = function (message, ActionType) {
     async function getName() {
