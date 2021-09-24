@@ -6,6 +6,7 @@ common_learning.txt
 logs.txt
 announce.json
 announceFIN.txt
+statistics.json
 images/*.gif
 images/*.jpg
 images/*.jpeg

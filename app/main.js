@@ -119,9 +119,16 @@ if (AI) { /* ON MESSAGE AI branch */
 }
 
 if (stalking) { /* stalking users */
-    client.on('presenceUpdate', (oldPresence, newPresence) => {
-        stalking_function.StalkingStart(oldPresence, newPresence, client);
+    client.on('messageCreate', message => {
+        stalking_function.StalkingMessages(message, "create");
     });
+    client.on('messageUpdate', message => {
+        stalking_function.StalkingMessages(message, "edit");
+    });
+    client.on('messageDelete', message => {
+        stalking_function.StalkingMessages(message, "delete");
+    });
+
     log.info(i18n.__("enabledStalking"));
 } else {
     log.info(i18n.__("disabledStalking"));

@@ -1,36 +1,44 @@
-/*global i18n*/
 const log = require('./logger.js');
-const discord = require('../app/functions_discord.js');
-const { stalkingPosterChannelID } = require('../config/config.json');
+const path = require('path');
+const fs = require('fs-extra');
+const basic = require('./functions_basic');
 const date = require('date-and-time');
 const ordinal = require('date-and-time/plugin/ordinal');
 date.plugin(ordinal);
-var userStatus = {};
+var messageCounter = {};
+var UserName = "user";
+const statisticsPath = path.normalize(path.join(process.cwd(), 'statistics.json'));
+try {
+    if (!fs.existsSync(statisticsPath)) {
+        basic.fwSYNC(statisticsPath, "{}\n", "A");
+    }
+} catch (err) {
+    log.info(err);
+}
 
-//description: 'start AI tasks'
-module.exports.StalkingStart = function (oldPresence, newPresence, client) {
+//description: 'start stalking messages'
+module.exports.StalkingMessages = function (message, ActionType) {
     async function getName() {
-        var tmp = (oldPresence) ? oldPresence.userID : newPresence.userID; // use user ID from OLD if possible
-        return client.users.fetch(tmp).then(user => {
-            return user;
-        }).catch(error => log.error(error));
+        return message.author.username.toString();
     }
     getName().then(user => {
-        if (user.bot) return; //ignore bots
-        var UserName = user.username;
-
-        if ((newPresence.activities).length >= 1) {
-            newPresence.activities.forEach(activity => {
-                userStatus[UserName] = { "activitytype": activity.type, "activityname": activity.name };
-                discord.sendMSGID(stalkingPosterChannelID, `${UserName} \`started\` ${userStatus[UserName].activitytype} => **${userStatus[UserName].activityname}**`);
-                log.info(i18n.__("stalking_start", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
-            });
-        } else {
-            if (typeof (userStatus[UserName]) == 'undefined') return;
-            if (typeof (userStatus[UserName].activitytype) == 'undefined') return;
-            discord.sendMSGID(stalkingPosterChannelID, `${UserName} \`stopped\` ${userStatus[UserName].activitytype} => **${userStatus[UserName].activityname}**`);
-            log.info(i18n.__("stalking_stop", UserName, userStatus[UserName].activitytype, userStatus[UserName].activityname));
-            userStatus[UserName] = {};
+        UserName = user;
+        messageCounter[UserName] = {
+            "posted": (typeof (messageCounter[UserName]) !== 'undefined') ? messageCounter[UserName].posted : 0,
+            "edited": (typeof messageCounter[UserName] !== 'undefined') ? messageCounter[UserName].edited : 0,
+            "deleted": (typeof messageCounter[UserName] !== 'undefined') ? messageCounter[UserName].deleted : 0
+        };
+        switch (ActionType) {
+            case "create":
+                messageCounter[UserName].posted++;
+                break;
+            case "edit":
+                messageCounter[UserName].edited++;
+                break;
+            case "delete":
+                messageCounter[UserName].deleted++;
+                break;
         }
+        basic.JSON_edit(statisticsPath, UserName, { "posted": messageCounter[UserName].posted, "edited": messageCounter[UserName].edited, "deleted": messageCounter[UserName].deleted });
     }).catch(error => log.error(error));
 };
