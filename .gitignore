@@ -4,6 +4,7 @@ data/replies.json
 data/anime.json
 common_learning.txt
 logs.txt
+logs*.txt
 announce.json
 announceFIN.txt
 statistics.json

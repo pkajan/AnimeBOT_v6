@@ -28,6 +28,22 @@ basic.announceFill(animes, announcePath); // fill announce file
 basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'announceFIN.txt')), "", "A");
 basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'data', 'responses.txt')), "", "A");
 
+//logs
+const { logfile } = require('../config/config.json');
+var stats = fs.statSync(logfile)
+var fileSizeInBytes = (stats.size / 1024) / 1024; //size in MB
+console.log(fileSizeInBytes);
+if (fileSizeInBytes > 8) {
+    var date_ob = new Date();
+    var day = date_ob.getDate();
+    var month = date_ob.getMonth() + 1;
+    var year = date_ob.getFullYear();
+    fs.rename(logfile, logfile + `_${year}-${month}-${day}_${date_ob/1}.txt`, function (err) {
+        if (err) throw err
+        log.info(i18n.__("log_backup"));
+    })
+}
+
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILD_PRESENCES,
     Intents.FLAGS.GUILD_MEMBERS,

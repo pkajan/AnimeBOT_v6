@@ -66,5 +66,6 @@
 	"a9gag": "Corrected 9gag comment image [%s]",
 	"cmd_lastupd_log": "Last updates info.",
 	"cmd_lastupd_ahead": "Your branch is ahead of you, update!",
-	"cmd_lastupd_current": "You are currently at commit: %s"
+	"cmd_lastupd_current": "You are currently at commit: %s",
+	"log_backup": "Backup of old log file."
 }
