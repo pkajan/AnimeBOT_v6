@@ -51,6 +51,7 @@
 	"AI_reply_goodnights": "AI good night %s (regEx: `%s` ¦ string: `%s`)",
 	"AI_reply_goodbyes": "AI goodbye %s (regEx: `%s` ¦ string: `%s`)",
 	"cmd_log_msg_log": "Log file send to %s",
+	"cmd_log_msg_stats": "Statiscics file send to %s",
 	"AI_Autoreply_msg": "Automatic random reply to %s with message.",
 	"AI_Autoreply_img": "Automatic random reply to %s with image.",
 	"AI_Autoreply_msg_name": "Name mention reply to %s with message.",
