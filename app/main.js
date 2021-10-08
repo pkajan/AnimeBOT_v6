@@ -32,7 +32,7 @@ basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'data', 'responses.txt')), ""
 const { logfile } = require('../config/config.json');
 var stats = fs.statSync(logfile)
 var fileSizeInBytes = (stats.size / 1024) / 1024; //size in MB
-console.log(fileSizeInBytes);
+
 if (fileSizeInBytes > 8) {
     var date_ob = new Date();
     var day = date_ob.getDate();
