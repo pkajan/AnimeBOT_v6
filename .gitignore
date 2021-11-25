@@ -7,7 +7,7 @@ logs.txt
 logs*.txt
 announce.json
 announceFIN.txt
-statistics.json
+*statistics.json
 images/*.gif
 images/*.jpg
 images/*.jpeg
