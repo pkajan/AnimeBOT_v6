@@ -38,10 +38,26 @@ if (fileSizeInBytes > 8) {
     var day = date_ob.getDate();
     var month = date_ob.getMonth() + 1;
     var year = date_ob.getFullYear();
-    fs.rename(logfile, logfile + `_${year}-${month}-${day}_${date_ob/1}.txt`, function (err) {
+    fs.rename(logfile, logfile + `_${year}-${month}-${day}_${date_ob / 1}.txt`, function (err) {
         if (err) throw err
         log.info(i18n.__("log_backup"));
     })
+}
+
+//statistics log
+var curDate = new Date();
+const stats_log_file = `${curDate.getFullYear()}_${curDate.getMonth()}_statistics.json`;
+if (curDate.getDate() == 1) {
+    try {
+        if (!fs.existsSync(stats_log_file)) {
+            fs.rename("statistics.json", `${curDate.getFullYear()}_${curDate.getMonth()}_statistics.json`, function (err) {
+                if (err) throw err
+                log.info(i18n.__("log_stats_backup"));
+            })
+        }
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 const myIntents = new Intents();

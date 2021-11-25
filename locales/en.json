@@ -67,5 +67,6 @@
 	"cmd_lastupd_log": "Last updates info.",
 	"cmd_lastupd_ahead": "Your branch is ahead of you, update!",
 	"cmd_lastupd_current": "You are currently at commit: %s",
-	"log_backup": "Backup of old log file."
+	"log_backup": "Backup of old log file.",
+	"log_stats_backup": "Backup of old statistics log file."
 }
