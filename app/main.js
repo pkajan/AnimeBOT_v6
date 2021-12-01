@@ -10,7 +10,6 @@ const log = require('./logger.js');
 const basic = require('./functions_basic');
 const crons = require('./crons.js');
 const AI_function = require('./AI.js');
-const stalking_function = require('./stalking.js');
 const { prefix, token, activityType, activityName, AI, stalking, a9gagCorrector, testing_mode } = require('../config/config.json');
 const animes = require('../data/anime.json');
 const path = require('path');
@@ -59,6 +58,7 @@ if (curDate.getDate() == 1) {
         console.error(err)
     }
 }
+const stalking_function = require('./stalking.js');
 
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILD_PRESENCES,
