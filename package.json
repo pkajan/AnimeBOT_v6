@@ -40,7 +40,8 @@
       "*.txt",
       "*.example",
       ".git",
-      "node_modules/*"
+      "node_modules/*",
+      "data/*.csv"
     ],
     "ext": "js json reset",
     "delay": "10000"
