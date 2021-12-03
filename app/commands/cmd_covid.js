@@ -21,7 +21,7 @@ module.exports = {
 
 			var COVIDmessage = "**COVID STATS**\n" +
 				"**DATE**: " + tmp[tmp.length - 3][0] + " => " + tmp[tmp.length - 2][0] + "\n" +
-				"**POZIT+**: **" + (tmp[tmp.length - 2][3] - tmp[tmp.length - 3][3]) + "** `[" + tmp[tmp.length - 3][3] + " => " + tmp[tmp.length - 2][3] + "]`\n" +
+				"**POZIT+**: **" +  tmp[tmp.length - 2][3] + "**\n" +
 				"**DEATH+**: **" + (tmp[tmp.length - 2][4] - tmp[tmp.length - 3][4]) + "** `[" + tmp[tmp.length - 3][4] + " => " + tmp[tmp.length - 2][4] + "]`";
 			discord.replyMSG(data.message, COVIDmessage);
 			log.info(i18n.__("cmd_covid_log", data.message.author.username.toString()));
