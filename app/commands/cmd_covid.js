@@ -15,6 +15,10 @@ module.exports = {
 		function optimizeString(str) {
 			return str.replace(/\r?\n|\r/g, "");
 		}
+		function testEmpty(str) {
+			if (str == "undefined" || str == "NA") return null;
+			return str;
+		}
 		var csvfile = path.normalize(path.join(data.baseAppPATH, "data", "data.csv"));
 		basic.download(covid_data_csv, csvfile);
 
@@ -26,9 +30,9 @@ module.exports = {
 
 			var COVIDmessage = "**COVID STATS**\n" +
 				optimizeString("**DATE**: " + tmp[tmp.length - 3][0] + " => " + tmp[tmp.length - 2][0]) + "\n" +
-				optimizeString("**POZIT PCR+**: **" + tmp[tmp.length - 2][3] + "** / " + tmp[tmp.length - 2][2]) + "\n" +
-				optimizeString("**POZIT Ag+**: **" + tmp[tmp.length - 2][6] + "** / " + tmp[tmp.length - 2][5]) + "\n" +
-				optimizeString("**DEATH+**: **" + (tmp[tmp.length - 2][4] - tmp[tmp.length - 3][4]) + "** `[" + tmp[tmp.length - 3][4] + " => " + tmp[tmp.length - 2][4] + "]`");
+				((testEmpty(tmp[tmp.length - 2][2])) ? optimizeString("**POZIT PCR+**: **" + tmp[tmp.length - 2][3] + "** / " + tmp[tmp.length - 2][2]) + "\n" : "") +
+				((testEmpty(tmp[tmp.length - 2][5])) ? optimizeString("**POZIT Ag+**: **" + tmp[tmp.length - 2][6] + "** / " + tmp[tmp.length - 2][5]) + "\n" : "") +
+				((testEmpty(tmp[tmp.length - 2][4])) ? optimizeString("**DEATH+**: **" + (tmp[tmp.length - 2][4] - tmp[tmp.length - 3][4]) + "** `[" + tmp[tmp.length - 3][4] + " => " + tmp[tmp.length - 2][4] + "]`") : "");
 			discord.replyMSG(data.message, COVIDmessage);
 			log.info(i18n.__("cmd_covid_log", data.message.author.username.toString()));
 		}, 5000);
