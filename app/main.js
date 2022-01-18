@@ -29,7 +29,14 @@ basic.fwSYNC(path.normalize(path.join(baseAppPATH, 'data', 'responses.txt')), ""
 
 //logs
 const { logfile } = require('../config/config.json');
-var stats = fs.statSync(logfile)
+try {
+    if (!fs.existsSync(logfile)) {
+        basic.fwSYNC(logfile, "", "A");
+    }
+} catch (err) {
+    log.info(err);
+}
+var stats = fs.statSync(logfile);
 var fileSizeInBytes = (stats.size / 1024) / 1024; //size in MB
 
 if (fileSizeInBytes > 8) {
