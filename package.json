@@ -8,7 +8,7 @@
     "date-and-time": "^2.1.0",
     "discord.js": "^13.6.0",
     "fs-extra": "^10.0.0",
-    "i18n": "^0.14.1",
+    "i18n": "^0.14.2",
     "node-fetch": "2.6.7",
     "retus": "^1.1.2",
     "simple-node-logger": "^21.8.12"
