@@ -4,17 +4,17 @@
   "description": "-",
   "main": "index.js",
   "dependencies": {
-    "cron": "^1.8.2",
-    "date-and-time": "^2.3.0",
-    "discord.js": "^13.6.0",
-    "fs-extra": "^10.0.1",
-    "i18n": "^0.14.2",
+    "cron": "^2.0.0",
+    "date-and-time": "^2.4.0",
+    "discord.js": "^13.8.1",
+    "fs-extra": "^10.1.0",
+    "i18n": "^0.15.0",
     "node-fetch": "2.6.7",
     "retus": "^1.1.2",
     "simple-node-logger": "^21.8.12"
   },
   "devDependencies": {
-    "eslint": "^8.12.0"
+    "eslint": "^8.18.0"
   },
   "scripts": {
     "preinstall": "npm i -g nodemon && npm i -g npm-check-updates",
